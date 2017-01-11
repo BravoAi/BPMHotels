@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_C_INwNcQEea2n-j6be2b4A" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="_methodItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_resultItem" structureRef="com.bravo.management.User"/>
+  <bpmn2:itemDefinition id="_userNameItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_userObjectItem" structureRef="com.bravo.management.User"/>
+  <bpmn2:itemDefinition id="_instanceUsersMapItem" structureRef="java.util.Map"/>
+  <bpmn2:itemDefinition id="_responseItem" structureRef="com.bravo.management.User"/>
+  <bpmn2:itemDefinition id="_queryResponseItem" structureRef="java.util.List"/>
+  <bpmn2:process id="HotelManagement.workersData" drools:packageName="org.jbpm" drools:version="1.0" name="workersData" isExecutable="true">
+    <bpmn2:extensionElements>
+      <drools:global identifier="workersMap" type="java.util.Map"/>
+    </bpmn2:extensionElements>
+    <bpmn2:property id="method" itemSubjectRef="_methodItem"/>
+    <bpmn2:property id="result" itemSubjectRef="_resultItem"/>
+    <bpmn2:property id="userName" itemSubjectRef="_userNameItem"/>
+    <bpmn2:property id="userObject" itemSubjectRef="_userObjectItem"/>
+    <bpmn2:property id="instanceUsersMap" itemSubjectRef="_instanceUsersMapItem"/>
+    <bpmn2:property id="response" itemSubjectRef="_responseItem"/>
+    <bpmn2:property id="queryResponse" itemSubjectRef="_queryResponseItem"/>
+    <bpmn2:startEvent id="processStartEvent" drools:selectable="true" color:background-color="#9acd32" color:border-color="#000000" color:color="#000000" name="">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:documentation id="_C_INwdcQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:outgoing>_ADD408A6-81FD-4E99-8A83-C7F1610526BD</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:scriptTask id="_3BB97098-D3E4-4160-9183-BEA6E25BDF78" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="validation" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[validation]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_ADD408A6-81FD-4E99-8A83-C7F1610526BD</bpmn2:incoming>
+      <bpmn2:outgoing>_13A0DA4C-6531-4279-B10B-2BDB2E4C3896</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[
+
+
+java.util.Map localmap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");
+if (localmap==null){
+localmap =new java.util.HashMap<String,com.bravo.management.User>();
+kcontext.getKnowledgeRuntime().setGlobal("workersMap",localmap);
+
+}
+
+String methodName=(String)kcontext.getVariable("method");
+System.out.println("**********************methodName "+methodName);
+]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="_ADD408A6-81FD-4E99-8A83-C7F1610526BD" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="_3BB97098-D3E4-4160-9183-BEA6E25BDF78">
+      <bpmn2:documentation id="_C_INwtcQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
+    <bpmn2:exclusiveGateway id="_2560865B-EDE6-4DC9-A89B-394124F746DD" drools:selectable="true" drools:dg="default : _8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40" color:background-color="#f0e68c" color:border-color="#FF6600" color:color="#000000" name="" gatewayDirection="Diverging" default="_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40">
+      <bpmn2:documentation id="_C_INw9cQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:incoming>_13A0DA4C-6531-4279-B10B-2BDB2E4C3896</bpmn2:incoming>
+      <bpmn2:outgoing>_CB19EE78-48D4-4EA6-A1A2-A0C41699E529</bpmn2:outgoing>
+      <bpmn2:outgoing>_70F0A233-4059-4F19-B9F2-EB32CD3761F4</bpmn2:outgoing>
+      <bpmn2:outgoing>_09BF6461-739E-4549-8C7B-3E5E1ED3ADF5</bpmn2:outgoing>
+      <bpmn2:outgoing>_FDCD84B2-6C0D-49FC-BFCA-63C04560FDA7</bpmn2:outgoing>
+      <bpmn2:outgoing>_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="_13A0DA4C-6531-4279-B10B-2BDB2E4C3896" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_3BB97098-D3E4-4160-9183-BEA6E25BDF78" targetRef="_2560865B-EDE6-4DC9-A89B-394124F746DD"/>
+    <bpmn2:scriptTask id="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="delete" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[delete]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_FDCD84B2-6C0D-49FC-BFCA-63C04560FDA7</bpmn2:incoming>
+      <bpmn2:outgoing>_3E424D0C-604A-435F-AE0B-EFB31713699C</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[
+java.util.Map localmap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");
+
+com.bravo.management.User userObjectLocal=(com.bravo.management.User)kcontext.getVariable("userObject");
+
+//System.out.println("_________******************** userObjectLocal:"+userObjectLocal);
+
+
+String userNameLocal=userObjectLocal.getUserId();
+com.bravo.management.User responselocal=null;
+if (userNameLocal!=null){
+  responselocal=(com.bravo.management.User)localmap.get(userNameLocal);
+  localmap.remove(userNameLocal);
+  
+  kcontext.getKnowledgeRuntime().setGlobal("workersMap",localmap);
+ 
+}
+
+//this assignment is to avoid of case to return null response to the caller process since it is cause to null pointer exception
+kcontext.setVariable("response",responselocal);]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="_FDCD84B2-6C0D-49FC-BFCA-63C04560FDA7" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" name="delete" sourceRef="_2560865B-EDE6-4DC9-A89B-394124F746DD" targetRef="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[delete]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_C_INxNcQEea2n-j6be2b4A" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "delete");]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:scriptTask id="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_107EF45D-C157-4DEF-AFD5-8E17C1E39A34</bpmn2:incoming>
+      <bpmn2:outgoing>_1C7AFDF6-C952-49A3-912D-C1361459991A</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[ java.util.Map usersMap=(java.util.Map<String, com.bravo.management.User>)kcontext.getKnowledgeRuntime().getGlobal("workersMap");
+ System.out.println("****************************");
+
+java.util.Set<java.util.Map.Entry<String, com.bravo.management.User>> entries = (java.util.Set<java.util.Map.Entry<String, com.bravo.management.User>>)usersMap.entrySet();
+
+
+
+java.util.List<java.util.Map.Entry> entryList=new java.util.ArrayList<java.util.Map.Entry>(entries);
+	
+for (int i=0;i<entryList.size();i++){
+ System.out.println(entryList.get(i));
+}
+
+ System.out.println("****************************");
+
+//storing  map in the local instance variable for persistence purpose
+kcontext.setVariable("instanceUsersMap",usersMap);
+
+
+//to avoid null pointer exception we should avoid return to the caller process null value
+if (kcontext.getVariable("response")==null){
+ kcontext.setVariable("response",new com.bravo.management.User()); 
+}
+
+
+System.out.println("exit workersData process");
+]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" name="default" sourceRef="_2560865B-EDE6-4DC9-A89B-394124F746DD" targetRef="_2664314C-CAF2-42B0-9278-5C327EBD5029">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[default]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:documentation id="_C_INxdcQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_C_INxtcQEea2n-j6be2b4A"></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:scriptTask id="_B6A35776-6A82-41A2-9186-6E1DE758FDD7" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="get method" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[get method]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_70F0A233-4059-4F19-B9F2-EB32CD3761F4</bpmn2:incoming>
+      <bpmn2:outgoing>_9796B0E0-DAAF-4A98-989D-74F6779095BF</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[java.util.Map localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");
+
+com.bravo.management.User userObjectInput=(com.bravo.management.User)kcontext.getVariable("userObject");
+
+
+
+
+
+String userNameLocal=userObjectInput.getUserId();
+
+com.bravo.management.User userObjectOutput=(com.bravo.management.User)localMap.get(userNameLocal);
+
+System.out.println("+++++++++++++++++++ userObjectOutput:"+userObjectOutput);
+System.out.println("+++++++++++++++++++ userNameLocal:"+userNameLocal);
+
+
+kcontext.setVariable("response",userObjectOutput);
+
+
+
+]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="_70F0A233-4059-4F19-B9F2-EB32CD3761F4" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" name="get" sourceRef="_2560865B-EDE6-4DC9-A89B-394124F746DD" targetRef="_B6A35776-6A82-41A2-9186-6E1DE758FDD7">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[get]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_C_INx9cQEea2n-j6be2b4A" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "get");]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:exclusiveGateway id="_2664314C-CAF2-42B0-9278-5C327EBD5029" drools:selectable="true" drools:dg="" color:background-color="#f0e68c" color:border-color="#a67f00" color:color="#000000" name="" gatewayDirection="Converging">
+      <bpmn2:incoming>_0D9366FD-1AF4-495A-B142-18E0556E0A25</bpmn2:incoming>
+      <bpmn2:incoming>_C3113030-E36F-4247-BCFF-9121281F1240</bpmn2:incoming>
+      <bpmn2:incoming>_9796B0E0-DAAF-4A98-989D-74F6779095BF</bpmn2:incoming>
+      <bpmn2:incoming>_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40</bpmn2:incoming>
+      <bpmn2:incoming>_3E424D0C-604A-435F-AE0B-EFB31713699C</bpmn2:incoming>
+      <bpmn2:outgoing>_52B4029A-D21C-48E0-B023-3D7CF65B0F36</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="_3E424D0C-604A-435F-AE0B-EFB31713699C" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63" targetRef="_2664314C-CAF2-42B0-9278-5C327EBD5029">
+      <bpmn2:documentation id="_C_INyNcQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_9796B0E0-DAAF-4A98-989D-74F6779095BF" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_B6A35776-6A82-41A2-9186-6E1DE758FDD7" targetRef="_2664314C-CAF2-42B0-9278-5C327EBD5029">
+      <bpmn2:documentation id="_C_INydcQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_52B4029A-D21C-48E0-B023-3D7CF65B0F36" drools:selectable="true" drools:priority="2" color:background-color="#000000" color:border-color="#000000" color:color="#000000" name="default_connection" sourceRef="_2664314C-CAF2-42B0-9278-5C327EBD5029" targetRef="_9C060933-80BB-41ED-9C74-21B9E5B198B4">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[default_connection]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:documentation id="_C_INytcQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
+    <bpmn2:scriptTask id="_C851F7B6-53CE-4B13-81BB-1349C7284BC7" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="update" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[update]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_09BF6461-739E-4549-8C7B-3E5E1ED3ADF5</bpmn2:incoming>
+      <bpmn2:outgoing>_0D9366FD-1AF4-495A-B142-18E0556E0A25</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[java.util.Map localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");
+
+com.bravo.management.User userObjectInput=(com.bravo.management.User)kcontext.getVariable("userObject");
+String userNameLocal=userObjectInput.getUserId();
+
+com.bravo.management.User userObjectOutput=(com.bravo.management.User)localMap.get(userNameLocal);
+
+System.out.println("+++++++++++++++++++ userObjectBeforeupdate:"+userObjectOutput);
+System.out.println("+++++++++++++++++++ userNameLocal:"+userNameLocal);
+
+if (userObjectOutput==null){
+ userObjectOutput=new com.bravo.management.User();
+ userObjectOutput.setUserId(userNameLocal);
+ localMap.put(userNameLocal,userObjectOutput);
+}
+
+if(userObjectInput.getDepartment()!=null){
+  userObjectOutput.setDepartment(userObjectInput.getDepartment());
+}
+
+if(userObjectInput.getStatus()!=null){
+  userObjectOutput.setStatus(userObjectInput.getStatus());
+}
+
+if(userObjectInput.getShiftExpirationTime()!=null){
+  userObjectOutput.setShiftExpirationTime(userObjectInput.getShiftExpirationTime());
+}
+
+kcontext.setVariable("response",userObjectOutput);
+localMap.put(userNameLocal,userObjectOutput);]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="_09BF6461-739E-4549-8C7B-3E5E1ED3ADF5" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" name="update" sourceRef="_2560865B-EDE6-4DC9-A89B-394124F746DD" targetRef="_C851F7B6-53CE-4B13-81BB-1349C7284BC7">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[update]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_C_INy9cQEea2n-j6be2b4A" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "update");]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_0D9366FD-1AF4-495A-B142-18E0556E0A25" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_C851F7B6-53CE-4B13-81BB-1349C7284BC7" targetRef="_2664314C-CAF2-42B0-9278-5C327EBD5029">
+      <bpmn2:documentation id="_C_INzNcQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
+    <bpmn2:scriptTask id="_F8809801-055A-48F0-A0AF-16DB127350F7" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="query method" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[query method]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_CB19EE78-48D4-4EA6-A1A2-A0C41699E529</bpmn2:incoming>
+      <bpmn2:outgoing>_C3113030-E36F-4247-BCFF-9121281F1240</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");
+
+com.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");
+
+
+
+java.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());
+	
+	java.util.List qualifiedUsers=new java.util.ArrayList();
+
+
+System.out.println("++++++++++++++++++++++++++++ query1");
+System.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);
+
+
+	for (int i=0;i<usersList.size();i++){
+      boolean match=true;
+      com.bravo.management.User userElement=usersList.get(i);
+	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); 
+	  
+	  
+      if (userObjectQuery.getUserId()!=null){
+        if( !userObjectQuery.getUserId().equals(userElement.getUserId()) ){
+			match=false;
+		}
+      }
+       if (userObjectQuery.getDepartment()!=null){
+        if(! userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){
+			match=false;
+		}
+      }
+      
+	   if (userObjectQuery.getStatus()!=null){
+        if( !userObjectQuery.getStatus().equals(userElement.getStatus()) ){
+			match=false;
+		}
+      }
+	  
+
+      	   if (userObjectQuery.getShiftExpirationTime()!=null){
+        if( !(userElement.getShiftExpirationTime()!=null && userElement.getShiftExpirationTime().after(userObjectQuery.getShiftExpirationTime()))){
+			match=false;
+		}
+      }
+      
+	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\n\n\n");
+	  
+      if(match){
+        qualifiedUsers.add(userElement);
+      }
+	}
+
+	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);
+	
+kcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="_CB19EE78-48D4-4EA6-A1A2-A0C41699E529" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" name="query" sourceRef="_2560865B-EDE6-4DC9-A89B-394124F746DD" targetRef="_F8809801-055A-48F0-A0AF-16DB127350F7">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[query]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:documentation id="_C_INzdcQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_C_INztcQEea2n-j6be2b4A" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "query");]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_C3113030-E36F-4247-BCFF-9121281F1240" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_F8809801-055A-48F0-A0AF-16DB127350F7" targetRef="_2664314C-CAF2-42B0-9278-5C327EBD5029">
+      <bpmn2:documentation id="_C_INz9cQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
+    <bpmn2:scriptTask id="_2D717277-9935-4C5A-BB79-A4A98BAD390E" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="query" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[query]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_F373283D-0D13-44EC-872A-2435B1F7D586</bpmn2:incoming>
+      <bpmn2:outgoing>_900BA090-9D26-4811-AF66-5359F1A57F99</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[java.lang.StringBuilder sb=new java.lang.StringBuilder();
+sb.append("**************************");
+sb.append("workersData query result: \n");
+
+
+java.util.List<com.bravo.management.User> qresponse=(java.util.List<com.bravo.management.User>)kcontext.getVariable("queryResponse");
+
+
+for(com.bravo.management.User user:qresponse){
+sb.append(user.toString()+"\n");
+}
+  
+if (qresponse.size()==0){
+  com.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");
+ sb.append("no matching elements were found in this query: "+userObjectQuery.toString());
+}
+
+sb.append("**************************");
+kcontext.setVariable("response",new com.bravo.management.User()); 
+ 
+
+System.out.println(sb.toString());]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:endEvent id="_7AC72943-AE7D-4EC8-AC6D-503F7EAD0E05" drools:selectable="true" color:background-color="#ff6347" color:border-color="#000000" color:color="#000000" name="">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_900BA090-9D26-4811-AF66-5359F1A57F99</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="_900BA090-9D26-4811-AF66-5359F1A57F99" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_2D717277-9935-4C5A-BB79-A4A98BAD390E" targetRef="_7AC72943-AE7D-4EC8-AC6D-503F7EAD0E05">
+      <bpmn2:documentation id="_C_IN0NcQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
+    <bpmn2:exclusiveGateway id="_9C060933-80BB-41ED-9C74-21B9E5B198B4" drools:selectable="true" drools:dg="" color:background-color="#f0e68c" color:border-color="#FF6600" color:color="#000000" name="" gatewayDirection="Diverging">
+      <bpmn2:incoming>_52B4029A-D21C-48E0-B023-3D7CF65B0F36</bpmn2:incoming>
+      <bpmn2:outgoing>_F373283D-0D13-44EC-872A-2435B1F7D586</bpmn2:outgoing>
+      <bpmn2:outgoing>_107EF45D-C157-4DEF-AFD5-8E17C1E39A34</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="_F373283D-0D13-44EC-872A-2435B1F7D586" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_9C060933-80BB-41ED-9C74-21B9E5B198B4" targetRef="_2D717277-9935-4C5A-BB79-A4A98BAD390E">
+      <bpmn2:documentation id="_C_IN0dcQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_C_IN0tcQEea2n-j6be2b4A" language="http://www.java.com/java"><![CDATA[return  (KieFunctions.equalsTo(method, "query"));]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_107EF45D-C157-4DEF-AFD5-8E17C1E39A34" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_9C060933-80BB-41ED-9C74-21B9E5B198B4" targetRef="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6">
+      <bpmn2:documentation id="_C_IN09cQEea2n-j6be2b4A"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_C_IN1NcQEea2n-j6be2b4A" language="http://www.java.com/java"><![CDATA[return  !(KieFunctions.equalsTo(method, "query"));]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="_E01A815C-698C-4616-A01B-5AB0B63F8289" drools:selectable="true" color:background-color="#ff6347" color:border-color="#000000" color:color="#000000" name="">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_1C7AFDF6-C952-49A3-912D-C1361459991A</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="_1C7AFDF6-C952-49A3-912D-C1361459991A" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6" targetRef="_E01A815C-698C-4616-A01B-5AB0B63F8289"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="_C_IN1dcQEea2n-j6be2b4A">
+    <bpmndi:BPMNPlane id="_C_IN1tcQEea2n-j6be2b4A" bpmnElement="HotelManagement.workersData">
+      <bpmndi:BPMNShape id="_C_IN19cQEea2n-j6be2b4A" bpmnElement="processStartEvent">
+        <dc:Bounds height="30.0" width="30.0" x="17.0" y="159.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_C_IN2NcQEea2n-j6be2b4A" bpmnElement="_3BB97098-D3E4-4160-9183-BEA6E25BDF78">
+        <dc:Bounds height="80.0" width="100.0" x="107.0" y="134.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN2dcQEea2n-j6be2b4A" bpmnElement="_ADD408A6-81FD-4E99-8A83-C7F1610526BD">
+        <di:waypoint xsi:type="dc:Point" x="32.0" y="174.0"/>
+        <di:waypoint xsi:type="dc:Point" x="157.0" y="174.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_C_IN2tcQEea2n-j6be2b4A" bpmnElement="_2560865B-EDE6-4DC9-A89B-394124F746DD">
+        <dc:Bounds height="40.0" width="40.0" x="317.0" y="164.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN29cQEea2n-j6be2b4A" bpmnElement="_13A0DA4C-6531-4279-B10B-2BDB2E4C3896">
+        <di:waypoint xsi:type="dc:Point" x="157.0" y="174.0"/>
+        <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_C_IN3NcQEea2n-j6be2b4A" bpmnElement="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63">
+        <dc:Bounds height="80.0" width="100.0" x="467.0" y="149.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN3dcQEea2n-j6be2b4A" bpmnElement="_FDCD84B2-6C0D-49FC-BFCA-63C04560FDA7">
+        <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
+        <di:waypoint xsi:type="dc:Point" x="517.0" y="189.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_C_IN3tcQEea2n-j6be2b4A" bpmnElement="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6">
+        <dc:Bounds height="80.0" width="100.0" x="825.0" y="150.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN39cQEea2n-j6be2b4A" bpmnElement="_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40">
+        <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
+        <di:waypoint xsi:type="dc:Point" x="337.0" y="530.0"/>
+        <di:waypoint xsi:type="dc:Point" x="682.0" y="530.0"/>
+        <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_C_IN4NcQEea2n-j6be2b4A" bpmnElement="_B6A35776-6A82-41A2-9186-6E1DE758FDD7">
+        <dc:Bounds height="80.0" width="100.0" x="482.0" y="44.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN4dcQEea2n-j6be2b4A" bpmnElement="_70F0A233-4059-4F19-B9F2-EB32CD3761F4">
+        <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
+        <di:waypoint xsi:type="dc:Point" x="456.0" y="126.0"/>
+        <di:waypoint xsi:type="dc:Point" x="532.0" y="84.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_C_IN4tcQEea2n-j6be2b4A" bpmnElement="_2664314C-CAF2-42B0-9278-5C327EBD5029">
+        <dc:Bounds height="40.0" width="40.0" x="662.0" y="174.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN49cQEea2n-j6be2b4A" bpmnElement="_3E424D0C-604A-435F-AE0B-EFB31713699C">
+        <di:waypoint xsi:type="dc:Point" x="517.0" y="189.0"/>
+        <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_C_IN5NcQEea2n-j6be2b4A" bpmnElement="_9796B0E0-DAAF-4A98-989D-74F6779095BF">
+        <di:waypoint xsi:type="dc:Point" x="532.0" y="84.0"/>
+        <di:waypoint xsi:type="dc:Point" x="682.0" y="84.0"/>
+        <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_C_IN5dcQEea2n-j6be2b4A" bpmnElement="_52B4029A-D21C-48E0-B023-3D7CF65B0F36">
+        <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
+        <di:waypoint xsi:type="dc:Point" x="772.0" y="194.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_C_IN5tcQEea2n-j6be2b4A" bpmnElement="_C851F7B6-53CE-4B13-81BB-1349C7284BC7">
+        <dc:Bounds height="80.0" width="100.0" x="465.0" y="240.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN59cQEea2n-j6be2b4A" bpmnElement="_09BF6461-739E-4549-8C7B-3E5E1ED3ADF5">
+        <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
+        <di:waypoint xsi:type="dc:Point" x="515.0" y="280.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_C_IN6NcQEea2n-j6be2b4A" bpmnElement="_0D9366FD-1AF4-495A-B142-18E0556E0A25">
+        <di:waypoint xsi:type="dc:Point" x="515.0" y="280.0"/>
+        <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_C_IN6dcQEea2n-j6be2b4A" bpmnElement="_F8809801-055A-48F0-A0AF-16DB127350F7">
+        <dc:Bounds height="80.0" width="100.0" x="467.0" y="389.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN6tcQEea2n-j6be2b4A" bpmnElement="_CB19EE78-48D4-4EA6-A1A2-A0C41699E529">
+        <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
+        <di:waypoint xsi:type="dc:Point" x="517.0" y="429.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_C_IN69cQEea2n-j6be2b4A" bpmnElement="_C3113030-E36F-4247-BCFF-9121281F1240">
+        <di:waypoint xsi:type="dc:Point" x="517.0" y="429.0"/>
+        <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_C_IN7NcQEea2n-j6be2b4A" bpmnElement="_2D717277-9935-4C5A-BB79-A4A98BAD390E">
+        <dc:Bounds height="80.0" width="100.0" x="827.0" y="254.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_C_IN7dcQEea2n-j6be2b4A" bpmnElement="_7AC72943-AE7D-4EC8-AC6D-503F7EAD0E05">
+        <dc:Bounds height="28.0" width="28.0" x="962.0" y="280.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN7tcQEea2n-j6be2b4A" bpmnElement="_900BA090-9D26-4811-AF66-5359F1A57F99">
+        <di:waypoint xsi:type="dc:Point" x="877.0" y="294.0"/>
+        <di:waypoint xsi:type="dc:Point" x="976.0" y="294.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_C_IN79cQEea2n-j6be2b4A" bpmnElement="_9C060933-80BB-41ED-9C74-21B9E5B198B4">
+        <dc:Bounds height="40.0" width="40.0" x="752.0" y="174.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN8NcQEea2n-j6be2b4A" bpmnElement="_F373283D-0D13-44EC-872A-2435B1F7D586">
+        <di:waypoint xsi:type="dc:Point" x="772.0" y="194.0"/>
+        <di:waypoint xsi:type="dc:Point" x="877.0" y="294.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_C_IN8dcQEea2n-j6be2b4A" bpmnElement="_107EF45D-C157-4DEF-AFD5-8E17C1E39A34">
+        <di:waypoint xsi:type="dc:Point" x="772.0" y="194.0"/>
+        <di:waypoint xsi:type="dc:Point" x="875.0" y="190.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_C_IN8tcQEea2n-j6be2b4A" bpmnElement="_E01A815C-698C-4616-A01B-5AB0B63F8289">
+        <dc:Bounds height="28.0" width="28.0" x="970.0" y="176.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_C_IN89cQEea2n-j6be2b4A" bpmnElement="_1C7AFDF6-C952-49A3-912D-C1361459991A">
+        <di:waypoint xsi:type="dc:Point" x="875.0" y="190.0"/>
+        <di:waypoint xsi:type="dc:Point" x="984.0" y="190.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship id="_C_IN9NcQEea2n-j6be2b4A" type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="min"/>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_3E424D0C-604A-435F-AE0B-EFB31713699C" id="_C_IN9dcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C851F7B6-53CE-4B13-81BB-1349C7284BC7" id="_C_IN9tcQEea2n-j6be2b4A">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_9796B0E0-DAAF-4A98-989D-74F6779095BF" id="_C_IN99cQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F373283D-0D13-44EC-872A-2435B1F7D586" id="_C_IN-NcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C3113030-E36F-4247-BCFF-9121281F1240" id="_C_IN-dcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6" id="_C_IN-tcQEea2n-j6be2b4A">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_2D717277-9935-4C5A-BB79-A4A98BAD390E" id="_C_IN-9cQEea2n-j6be2b4A">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_52B4029A-D21C-48E0-B023-3D7CF65B0F36" id="_C_IN_NcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_FDCD84B2-6C0D-49FC-BFCA-63C04560FDA7" id="_C_IN_dcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_13A0DA4C-6531-4279-B10B-2BDB2E4C3896" id="_C_IN_tcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_107EF45D-C157-4DEF-AFD5-8E17C1E39A34" id="_C_IN_9cQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_09BF6461-739E-4549-8C7B-3E5E1ED3ADF5" id="_C_IOANcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_ADD408A6-81FD-4E99-8A83-C7F1610526BD" id="_C_IOAdcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40" id="_C_IOAtcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_0D9366FD-1AF4-495A-B142-18E0556E0A25" id="_C_IOA9cQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_70F0A233-4059-4F19-B9F2-EB32CD3761F4" id="_C_IOBNcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_CB19EE78-48D4-4EA6-A1A2-A0C41699E529" id="_C_IOBdcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_C_IOBtcQEea2n-j6be2b4A">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F8809801-055A-48F0-A0AF-16DB127350F7" id="_C_IOB9cQEea2n-j6be2b4A">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_B6A35776-6A82-41A2-9186-6E1DE758FDD7" id="_C_IOCNcQEea2n-j6be2b4A">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_E01A815C-698C-4616-A01B-5AB0B63F8289" id="_C_IOCdcQEea2n-j6be2b4A">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_3BB97098-D3E4-4160-9183-BEA6E25BDF78" id="_C_IOCtcQEea2n-j6be2b4A">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_1C7AFDF6-C952-49A3-912D-C1361459991A" id="_C_IOC9cQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_900BA090-9D26-4811-AF66-5359F1A57F99" id="_C_IODNcQEea2n-j6be2b4A">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_7AC72943-AE7D-4EC8-AC6D-503F7EAD0E05" id="_C_IODdcQEea2n-j6be2b4A">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63" id="_C_IODtcQEea2n-j6be2b4A">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_C_INwNcQEea2n-j6be2b4A</bpmn2:source>
+    <bpmn2:target>_C_INwNcQEea2n-j6be2b4A</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
