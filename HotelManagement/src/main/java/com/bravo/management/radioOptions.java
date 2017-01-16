@@ -36,4 +36,9 @@ public class radioOptions implements java.io.Serializable
    {
       this.optionTexts = optionTexts;
    }
+   
+   public String toString(){
+      String str="options are: "+optionTexts;
+      return str;
+   }
 }
