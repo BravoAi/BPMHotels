@@ -9,43 +9,31 @@ public class radioOptions implements java.io.Serializable
 
    static final long serialVersionUID = 1L;
 
-   private java.lang.String option1;
-
-   private java.lang.String option2;
+   private java.util.List<java.lang.String> optionTexts;
 
    public radioOptions()
    {
    }
 
-   public java.lang.String getOption1()
+   public String toString()
    {
-      return this.option1;
-   }
-
-   public void setOption1(java.lang.String option1)
-   {
-      this.option1 = option1;
-   }
-
-   public java.lang.String getOption2()
-   {
-      return this.option2;
-   }
-
-   public void setOption2(java.lang.String option2)
-   {
-      this.option2 = option2;
-   }
-
-   public radioOptions(java.lang.String option1, java.lang.String option2)
-   {
-      this.option1 = option1;
-      this.option2 = option2;
-   }
-    
-    public String toString(){
-      String str="option 1:"+option1;
-      str+="  option 2:"+ option2;
+      String str = "option 1:" + option1;
+      str += "  option 2:" + option2;
       return str;
+   }
+
+   public java.util.List<java.lang.String> getOptionTexts()
+   {
+      return this.optionTexts;
+   }
+
+   public void setOptionTexts(java.util.List<java.lang.String> optionTexts)
+   {
+      this.optionTexts = optionTexts;
+   }
+
+   public radioOptions(java.util.List<java.lang.String> optionTexts)
+   {
+      this.optionTexts = optionTexts;
    }
 }
