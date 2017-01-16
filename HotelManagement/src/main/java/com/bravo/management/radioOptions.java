@@ -19,7 +19,8 @@ public class radioOptions implements java.io.Serializable
 
    public String toString()
    {
-      String str = "options are: " + optionTexts;
+      String str = "options are: " + option1;
+      str = " and " + option2;
       return str;
    }
 
