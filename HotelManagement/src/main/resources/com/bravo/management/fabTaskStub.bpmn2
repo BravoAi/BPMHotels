@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_quCeoNyEEeaGVfSlPLHPpw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_G3Z9ENyFEeaGVfSlPLHPpw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
   <bpmn2:itemDefinition id="_actorItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_fixResultItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_issueDescriptionItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="__F87220D3-4E6D-4316-972E-AE2748F261DB_fixResultIOInputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="__F87220D3-4E6D-4316-972E-AE2748F261DB_fixResultIOOutputXItem" structureRef="String"/>
   <bpmn2:process id="HotelManagement.fabTaskStub" drools:packageName="org.jbpm" drools:version="1.0" name="fabTaskStub" isExecutable="true">
     <bpmn2:property id="actor" itemSubjectRef="_actorItem"/>
     <bpmn2:property id="fixResult" itemSubjectRef="_fixResultItem"/>
@@ -25,7 +27,7 @@
       <bpmn2:outgoing>_8F6950AA-2B7E-4259-AF78-81D1FEBD71F4</bpmn2:outgoing>
       <bpmn2:script><![CDATA[System.out.println("*************>> This is the FAB-Task-Stub process. rocessInstanceId = "+kcontext.getProcessInstance().getId()+"date"+new java.util.Date());
 
-System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDescription);]]></bpmn2:script>
+System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDescription));]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="_D9781427-9B21-40AA-ADFC-192C3A394191" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="_E8965F0C-F69D-4454-8D06-5EDE63AA7129"/>
     <bpmn2:scriptTask id="_2EFDDEAC-3CE6-4828-BF42-6A0FD62FCDAF" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="select actor" scriptFormat="http://www.java.com/java">
@@ -36,6 +38,9 @@ System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDe
       </bpmn2:extensionElements>
       <bpmn2:incoming>_8F6950AA-2B7E-4259-AF78-81D1FEBD71F4</bpmn2:incoming>
       <bpmn2:outgoing>_19F4107A-EAFC-44C2-8EA0-F33348F99898</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[kcontext.setVariable("actor","yossi");
+
+System.out.println("*************>> Actor was set to: "+kcontext.getVariable(actor));]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="_8F6950AA-2B7E-4259-AF78-81D1FEBD71F4" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_E8965F0C-F69D-4454-8D06-5EDE63AA7129" targetRef="_2EFDDEAC-3CE6-4828-BF42-6A0FD62FCDAF"/>
     <bpmn2:userTask id="_F87220D3-4E6D-4316-972E-AE2748F261DB" drools:selectable="true" drools:scriptFormat="http://www.java.com/java" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="fix">
@@ -46,19 +51,33 @@ System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDe
       </bpmn2:extensionElements>
       <bpmn2:incoming>_19F4107A-EAFC-44C2-8EA0-F33348F99898</bpmn2:incoming>
       <bpmn2:outgoing>_B5EE9066-1337-4B49-BFF8-67E17C712AF4</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="_quCeodyEEeaGVfSlPLHPpw">
+      <bpmn2:ioSpecification id="_G3akINyFEeaGVfSlPLHPpw">
+        <bpmn2:dataInput id="_F87220D3-4E6D-4316-972E-AE2748F261DB_fixResultIOInputX" drools:dtype="String" itemSubjectRef="__F87220D3-4E6D-4316-972E-AE2748F261DB_fixResultIOInputXItem" name="fixResultIO"/>
         <bpmn2:dataInput id="_F87220D3-4E6D-4316-972E-AE2748F261DB_SkippableInputX" name="Skippable"/>
-        <bpmn2:inputSet id="_quCeotyEEeaGVfSlPLHPpw">
+        <bpmn2:dataOutput id="_F87220D3-4E6D-4316-972E-AE2748F261DB_fixResultIOOutputX" drools:dtype="String" itemSubjectRef="__F87220D3-4E6D-4316-972E-AE2748F261DB_fixResultIOOutputXItem" name="fixResultIO"/>
+        <bpmn2:inputSet id="_G3akIdyFEeaGVfSlPLHPpw">
+          <bpmn2:dataInputRefs>_F87220D3-4E6D-4316-972E-AE2748F261DB_fixResultIOInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_F87220D3-4E6D-4316-972E-AE2748F261DB_SkippableInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
+        <bpmn2:outputSet id="_G3akItyFEeaGVfSlPLHPpw">
+          <bpmn2:dataOutputRefs>_F87220D3-4E6D-4316-972E-AE2748F261DB_fixResultIOOutputX</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_quCeo9yEEeaGVfSlPLHPpw">
+      <bpmn2:dataInputAssociation id="_G3akI9yFEeaGVfSlPLHPpw">
+        <bpmn2:sourceRef>fixResult</bpmn2:sourceRef>
+        <bpmn2:targetRef>_F87220D3-4E6D-4316-972E-AE2748F261DB_fixResultIOInputX</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_G3akJNyFEeaGVfSlPLHPpw">
         <bpmn2:targetRef>_F87220D3-4E6D-4316-972E-AE2748F261DB_SkippableInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_quCepNyEEeaGVfSlPLHPpw">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_quCepdyEEeaGVfSlPLHPpw">true</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_quCeptyEEeaGVfSlPLHPpw">_F87220D3-4E6D-4316-972E-AE2748F261DB_SkippableInputX</bpmn2:to>
+        <bpmn2:assignment id="_G3akJdyFEeaGVfSlPLHPpw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_G3akJtyFEeaGVfSlPLHPpw">true</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_G3akJ9yFEeaGVfSlPLHPpw">_F87220D3-4E6D-4316-972E-AE2748F261DB_SkippableInputX</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="_G3akKNyFEeaGVfSlPLHPpw">
+        <bpmn2:sourceRef>_F87220D3-4E6D-4316-972E-AE2748F261DB_fixResultIOOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>fixResult</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="_19F4107A-EAFC-44C2-8EA0-F33348F99898" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_2EFDDEAC-3CE6-4828-BF42-6A0FD62FCDAF" targetRef="_F87220D3-4E6D-4316-972E-AE2748F261DB"/>
     <bpmn2:scriptTask id="_E1728E6B-3F5C-4E13-BC98-7D60DD577B34" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="print result" scriptFormat="http://www.java.com/java">
@@ -69,6 +88,7 @@ System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDe
       </bpmn2:extensionElements>
       <bpmn2:incoming>_B5EE9066-1337-4B49-BFF8-67E17C712AF4</bpmn2:incoming>
       <bpmn2:outgoing>_76025829-325A-43B8-A494-D393DCF48E7E</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[System.out.println("*************>> Fix result is: "+kcontext.getVariable(fixResult));]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="_B5EE9066-1337-4B49-BFF8-67E17C712AF4" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_F87220D3-4E6D-4316-972E-AE2748F261DB" targetRef="_E1728E6B-3F5C-4E13-BC98-7D60DD577B34"/>
     <bpmn2:endEvent id="_51C4263A-5D90-404D-9692-9740C2E24ACA" drools:selectable="true" color:background-color="#ff6347" color:border-color="#000000" color:color="#000000" name="">
@@ -80,76 +100,87 @@ System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDe
       <bpmn2:incoming>_76025829-325A-43B8-A494-D393DCF48E7E</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="_76025829-325A-43B8-A494-D393DCF48E7E" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_E1728E6B-3F5C-4E13-BC98-7D60DD577B34" targetRef="_51C4263A-5D90-404D-9692-9740C2E24ACA"/>
+    <bpmn2:textAnnotation id="_77E763C2-F0DA-446D-A386-7BB947A356F9" drools:selectable="true" color:background-color="" color:border-color="#000000" color:color="#000000">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[add signaling to GW that worker is rejected]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:text>add signaling to GW that worker is rejected</bpmn2:text>
+    </bpmn2:textAnnotation>
   </bpmn2:process>
-  <bpmndi:BPMNDiagram id="_quCep9yEEeaGVfSlPLHPpw">
-    <bpmndi:BPMNPlane id="_quCeqNyEEeaGVfSlPLHPpw" bpmnElement="HotelManagement.fabTaskStub">
-      <bpmndi:BPMNShape id="_quCeqdyEEeaGVfSlPLHPpw" bpmnElement="processStartEvent">
+  <bpmndi:BPMNDiagram id="_G3akKdyFEeaGVfSlPLHPpw">
+    <bpmndi:BPMNPlane id="_G3akKtyFEeaGVfSlPLHPpw" bpmnElement="HotelManagement.fabTaskStub">
+      <bpmndi:BPMNShape id="_G3akK9yFEeaGVfSlPLHPpw" bpmnElement="processStartEvent">
         <dc:Bounds height="30.0" width="30.0" x="120.0" y="165.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_quCeqtyEEeaGVfSlPLHPpw" bpmnElement="_E8965F0C-F69D-4454-8D06-5EDE63AA7129">
-        <dc:Bounds height="80.0" width="100.0" x="195.0" y="140.0"/>
+      <bpmndi:BPMNShape id="_G3akLNyFEeaGVfSlPLHPpw" bpmnElement="_E8965F0C-F69D-4454-8D06-5EDE63AA7129">
+        <dc:Bounds height="80.0" width="100.0" x="195.0" y="135.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_quCeq9yEEeaGVfSlPLHPpw" bpmnElement="_2EFDDEAC-3CE6-4828-BF42-6A0FD62FCDAF">
+      <bpmndi:BPMNShape id="_G3akLdyFEeaGVfSlPLHPpw" bpmnElement="_2EFDDEAC-3CE6-4828-BF42-6A0FD62FCDAF">
         <dc:Bounds height="80.0" width="100.0" x="330.0" y="140.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_quCerNyEEeaGVfSlPLHPpw" bpmnElement="_F87220D3-4E6D-4316-972E-AE2748F261DB">
+      <bpmndi:BPMNShape id="_G3akLtyFEeaGVfSlPLHPpw" bpmnElement="_F87220D3-4E6D-4316-972E-AE2748F261DB">
         <dc:Bounds height="80.0" width="100.0" x="465.0" y="140.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_quCerdyEEeaGVfSlPLHPpw" bpmnElement="_E1728E6B-3F5C-4E13-BC98-7D60DD577B34">
+      <bpmndi:BPMNShape id="_G3akL9yFEeaGVfSlPLHPpw" bpmnElement="_E1728E6B-3F5C-4E13-BC98-7D60DD577B34">
         <dc:Bounds height="80.0" width="100.0" x="615.0" y="140.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_quCertyEEeaGVfSlPLHPpw" bpmnElement="_51C4263A-5D90-404D-9692-9740C2E24ACA">
+      <bpmndi:BPMNShape id="_G3akMNyFEeaGVfSlPLHPpw" bpmnElement="_51C4263A-5D90-404D-9692-9740C2E24ACA">
         <dc:Bounds height="28.0" width="28.0" x="770.0" y="166.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="_quCer9yEEeaGVfSlPLHPpw" bpmnElement="_D9781427-9B21-40AA-ADFC-192C3A394191" sourceElement="_quCeqdyEEeaGVfSlPLHPpw" targetElement="_quCeqtyEEeaGVfSlPLHPpw">
+      <bpmndi:BPMNShape id="_G3akMdyFEeaGVfSlPLHPpw" bpmnElement="_77E763C2-F0DA-446D-A386-7BB947A356F9">
+        <dc:Bounds height="50.0" width="100.0" x="1082.0" y="695.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_G3akMtyFEeaGVfSlPLHPpw" bpmnElement="_D9781427-9B21-40AA-ADFC-192C3A394191" sourceElement="_G3akK9yFEeaGVfSlPLHPpw" targetElement="_G3akLNyFEeaGVfSlPLHPpw">
         <di:waypoint xsi:type="dc:Point" x="135.0" y="180.0"/>
-        <di:waypoint xsi:type="dc:Point" x="245.0" y="180.0"/>
+        <di:waypoint xsi:type="dc:Point" x="245.0" y="175.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_quDFsNyEEeaGVfSlPLHPpw" bpmnElement="_8F6950AA-2B7E-4259-AF78-81D1FEBD71F4" sourceElement="_quCeqtyEEeaGVfSlPLHPpw" targetElement="_quCeq9yEEeaGVfSlPLHPpw">
-        <di:waypoint xsi:type="dc:Point" x="245.0" y="180.0"/>
+      <bpmndi:BPMNEdge id="_G3akM9yFEeaGVfSlPLHPpw" bpmnElement="_8F6950AA-2B7E-4259-AF78-81D1FEBD71F4" sourceElement="_G3akLNyFEeaGVfSlPLHPpw" targetElement="_G3akLdyFEeaGVfSlPLHPpw">
+        <di:waypoint xsi:type="dc:Point" x="245.0" y="175.0"/>
         <di:waypoint xsi:type="dc:Point" x="380.0" y="180.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_quDFsdyEEeaGVfSlPLHPpw" bpmnElement="_19F4107A-EAFC-44C2-8EA0-F33348F99898" sourceElement="_quCeq9yEEeaGVfSlPLHPpw" targetElement="_quCerNyEEeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_G3akNNyFEeaGVfSlPLHPpw" bpmnElement="_19F4107A-EAFC-44C2-8EA0-F33348F99898" sourceElement="_G3akLdyFEeaGVfSlPLHPpw" targetElement="_G3akLtyFEeaGVfSlPLHPpw">
         <di:waypoint xsi:type="dc:Point" x="380.0" y="180.0"/>
         <di:waypoint xsi:type="dc:Point" x="515.0" y="180.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_quDFstyEEeaGVfSlPLHPpw" bpmnElement="_B5EE9066-1337-4B49-BFF8-67E17C712AF4" sourceElement="_quCerNyEEeaGVfSlPLHPpw" targetElement="_quCerdyEEeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_G3akNdyFEeaGVfSlPLHPpw" bpmnElement="_B5EE9066-1337-4B49-BFF8-67E17C712AF4" sourceElement="_G3akLtyFEeaGVfSlPLHPpw" targetElement="_G3akL9yFEeaGVfSlPLHPpw">
         <di:waypoint xsi:type="dc:Point" x="515.0" y="180.0"/>
         <di:waypoint xsi:type="dc:Point" x="665.0" y="180.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_quDFs9yEEeaGVfSlPLHPpw" bpmnElement="_76025829-325A-43B8-A494-D393DCF48E7E" sourceElement="_quCerdyEEeaGVfSlPLHPpw" targetElement="_quCertyEEeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_G3akNtyFEeaGVfSlPLHPpw" bpmnElement="_76025829-325A-43B8-A494-D393DCF48E7E" sourceElement="_G3akL9yFEeaGVfSlPLHPpw" targetElement="_G3akMNyFEeaGVfSlPLHPpw">
         <di:waypoint xsi:type="dc:Point" x="665.0" y="180.0"/>
         <di:waypoint xsi:type="dc:Point" x="784.0" y="180.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_quDFtNyEEeaGVfSlPLHPpw" type="BPSimData">
+  <bpmn2:relationship id="_G3akN9yFEeaGVfSlPLHPpw" type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
           <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="min"/>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_D9781427-9B21-40AA-ADFC-192C3A394191" id="_quDFtdyEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_D9781427-9B21-40AA-ADFC-192C3A394191" id="_G3akONyFEeaGVfSlPLHPpw">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_8F6950AA-2B7E-4259-AF78-81D1FEBD71F4" id="_quDFttyEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_8F6950AA-2B7E-4259-AF78-81D1FEBD71F4" id="_G3akOdyFEeaGVfSlPLHPpw">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_51C4263A-5D90-404D-9692-9740C2E24ACA" id="_quDFt9yEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_51C4263A-5D90-404D-9692-9740C2E24ACA" id="_G3akOtyFEeaGVfSlPLHPpw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F87220D3-4E6D-4316-972E-AE2748F261DB" id="_quDFuNyEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F87220D3-4E6D-4316-972E-AE2748F261DB" id="_G3akO9yFEeaGVfSlPLHPpw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -169,7 +200,7 @@ System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDe
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_E1728E6B-3F5C-4E13-BC98-7D60DD577B34" id="_quDFudyEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_E1728E6B-3F5C-4E13-BC98-7D60DD577B34" id="_G3akPNyFEeaGVfSlPLHPpw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -181,7 +212,7 @@ System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDe
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_2EFDDEAC-3CE6-4828-BF42-6A0FD62FCDAF" id="_quDFutyEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_2EFDDEAC-3CE6-4828-BF42-6A0FD62FCDAF" id="_G3akPdyFEeaGVfSlPLHPpw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -193,14 +224,14 @@ System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDe
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_76025829-325A-43B8-A494-D393DCF48E7E" id="_quDFu9yEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_76025829-325A-43B8-A494-D393DCF48E7E" id="_G3akPtyFEeaGVfSlPLHPpw">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_E8965F0C-F69D-4454-8D06-5EDE63AA7129" id="_quDFvNyEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_E8965F0C-F69D-4454-8D06-5EDE63AA7129" id="_G3akP9yFEeaGVfSlPLHPpw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -212,21 +243,21 @@ System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDe
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_B5EE9066-1337-4B49-BFF8-67E17C712AF4" id="_quDFvdyEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_B5EE9066-1337-4B49-BFF8-67E17C712AF4" id="_G3akQNyFEeaGVfSlPLHPpw">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_19F4107A-EAFC-44C2-8EA0-F33348F99898" id="_quDFvtyEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_19F4107A-EAFC-44C2-8EA0-F33348F99898" id="_G3akQdyFEeaGVfSlPLHPpw">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_quDFv9yEEeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_G3akQtyFEeaGVfSlPLHPpw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -241,7 +272,7 @@ System.out.println("*************>> the issue is: "+kcontext.getVariable(issueDe
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_quCeoNyEEeaGVfSlPLHPpw</bpmn2:source>
-    <bpmn2:target>_quCeoNyEEeaGVfSlPLHPpw</bpmn2:target>
+    <bpmn2:source>_G3Z9ENyFEeaGVfSlPLHPpw</bpmn2:source>
+    <bpmn2:target>_G3Z9ENyFEeaGVfSlPLHPpw</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
