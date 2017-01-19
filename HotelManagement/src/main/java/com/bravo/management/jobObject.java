@@ -44,6 +44,20 @@ public class jobObject implements java.io.Serializable
    @javax.persistence.ManyToOne(cascade = { javax.persistence.CascadeType.ALL }, fetch = javax.persistence.FetchType.EAGER)
    private com.bravo.management.jobCategoryObject subCategory;
 
+   private java.lang.String categoryIconUrl;
+
+   private java.lang.String title;
+
+   private java.lang.String description;
+
+   private java.lang.String status;
+
+   private java.math.BigInteger parentJobID;
+
+   private java.math.BigInteger childJobID;
+
+   private java.lang.String division;
+
    public jobObject()
    {
    }
@@ -189,16 +203,88 @@ public class jobObject implements java.io.Serializable
       this.subCategory = subCategory;
    }
 
+   public java.lang.String getCategoryIconUrl()
+   {
+      return this.categoryIconUrl;
+   }
+
+   public void setCategoryIconUrl(java.lang.String categoryIconUrl)
+   {
+      this.categoryIconUrl = categoryIconUrl;
+   }
+
+   public java.lang.String getTitle()
+   {
+      return this.title;
+   }
+
+   public void setTitle(java.lang.String title)
+   {
+      this.title = title;
+   }
+
+   public java.lang.String getDescription()
+   {
+      return this.description;
+   }
+
+   public void setDescription(java.lang.String description)
+   {
+      this.description = description;
+   }
+
+   public java.lang.String getStatus()
+   {
+      return this.status;
+   }
+
+   public void setStatus(java.lang.String status)
+   {
+      this.status = status;
+   }
+
+   public java.math.BigInteger getParentJobID()
+   {
+      return this.parentJobID;
+   }
+
+   public void setParentJobID(java.math.BigInteger parentJobID)
+   {
+      this.parentJobID = parentJobID;
+   }
+
+   public java.math.BigInteger getChildJobID()
+   {
+      return this.childJobID;
+   }
+
+   public void setChildJobID(java.math.BigInteger childJobID)
+   {
+      this.childJobID = childJobID;
+   }
+
+   public java.lang.String getDivision()
+   {
+      return this.division;
+   }
+
+   public void setDivision(java.lang.String division)
+   {
+      this.division = division;
+   }
+
    public jobObject(java.lang.Long id, java.lang.String type,
          java.lang.String typeIconUrl, java.lang.Boolean isUrgent,
-         java.lang.Boolean urgentIconUrl,
-         com.bravo.management.User assignedTo,
-         java.lang.Boolean isResultInRoomClosed,
-         java.lang.Boolean isCritical, java.lang.Integer standardTime,
-         java.lang.String location, java.lang.String contactPersonName,
-         java.lang.Boolean isContactIsGuest,
+         java.lang.Boolean urgentIconUrl, com.bravo.management.User assignedTo,
+         java.lang.Boolean isResultInRoomClosed, java.lang.Boolean isCritical,
+         java.lang.Integer standardTime, java.lang.String location,
+         java.lang.String contactPersonName, java.lang.Boolean isContactIsGuest,
          com.bravo.management.jobCategoryObject category,
-         com.bravo.management.jobCategoryObject subCategory)
+         com.bravo.management.jobCategoryObject subCategory,
+         java.lang.String categoryIconUrl, java.lang.String title,
+         java.lang.String description, java.lang.String status,
+         java.math.BigInteger parentJobID, java.math.BigInteger childJobID,
+         java.lang.String division)
    {
       this.id = id;
       this.type = type;
@@ -214,6 +300,13 @@ public class jobObject implements java.io.Serializable
       this.isContactIsGuest = isContactIsGuest;
       this.category = category;
       this.subCategory = subCategory;
+      this.categoryIconUrl = categoryIconUrl;
+      this.title = title;
+      this.description = description;
+      this.status = status;
+      this.parentJobID = parentJobID;
+      this.childJobID = childJobID;
+      this.division = division;
    }
 
 }
