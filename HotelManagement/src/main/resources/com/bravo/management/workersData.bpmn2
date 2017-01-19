@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_YcDCQNy2EeaGVfSlPLHPpw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_t9q54N4lEear6q0-6IYQPQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
   <bpmn2:itemDefinition id="_methodItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_resultItem" structureRef="com.bravo.management.User"/>
   <bpmn2:itemDefinition id="_userNameItem" structureRef="String"/>
@@ -7,6 +7,7 @@
   <bpmn2:itemDefinition id="_instanceUsersMapItem" structureRef="java.util.Map"/>
   <bpmn2:itemDefinition id="_responseItem" structureRef="com.bravo.management.User"/>
   <bpmn2:itemDefinition id="_queryResponseItem" structureRef="java.util.List"/>
+  <bpmn2:itemDefinition id="_userObjectListItem" structureRef="java.util.List"/>
   <bpmn2:process id="HotelManagement.workersData" drools:packageName="org.jbpm" drools:version="1.0" name="workersData" isExecutable="true">
     <bpmn2:extensionElements>
       <drools:global identifier="workersMap" type="java.util.Map"/>
@@ -18,13 +19,14 @@
     <bpmn2:property id="instanceUsersMap" itemSubjectRef="_instanceUsersMapItem"/>
     <bpmn2:property id="response" itemSubjectRef="_responseItem"/>
     <bpmn2:property id="queryResponse" itemSubjectRef="_queryResponseItem"/>
+    <bpmn2:property id="userObjectList" itemSubjectRef="_userObjectListItem"/>
     <bpmn2:startEvent id="processStartEvent" drools:selectable="true" color:background-color="#9acd32" color:border-color="#000000" color:color="#000000" name="">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue><![CDATA[]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:documentation id="_YcDCQdy2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:documentation id="_t9q54d4lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
       <bpmn2:outgoing>_ADD408A6-81FD-4E99-8A83-C7F1610526BD</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:scriptTask id="_3BB97098-D3E4-4160-9183-BEA6E25BDF78" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="validation" scriptFormat="http://www.java.com/java">
@@ -50,16 +52,17 @@ System.out.println("**********************methodName "+methodName);
 ]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="_ADD408A6-81FD-4E99-8A83-C7F1610526BD" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="_3BB97098-D3E4-4160-9183-BEA6E25BDF78">
-      <bpmn2:documentation id="_YcDCQty2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:documentation id="_t9q54t4lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
     </bpmn2:sequenceFlow>
     <bpmn2:exclusiveGateway id="_2560865B-EDE6-4DC9-A89B-394124F746DD" drools:selectable="true" drools:dg="default : _8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40" color:background-color="#f0e68c" color:border-color="#FF6600" color:color="#000000" name="" gatewayDirection="Diverging" default="_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40">
-      <bpmn2:documentation id="_YcDCQ9y2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:documentation id="_t9q5494lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
       <bpmn2:incoming>_13A0DA4C-6531-4279-B10B-2BDB2E4C3896</bpmn2:incoming>
-      <bpmn2:outgoing>_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40</bpmn2:outgoing>
       <bpmn2:outgoing>_CB19EE78-48D4-4EA6-A1A2-A0C41699E529</bpmn2:outgoing>
       <bpmn2:outgoing>_70F0A233-4059-4F19-B9F2-EB32CD3761F4</bpmn2:outgoing>
       <bpmn2:outgoing>_09BF6461-739E-4549-8C7B-3E5E1ED3ADF5</bpmn2:outgoing>
       <bpmn2:outgoing>_FDCD84B2-6C0D-49FC-BFCA-63C04560FDA7</bpmn2:outgoing>
+      <bpmn2:outgoing>_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40</bpmn2:outgoing>
+      <bpmn2:outgoing>_482869A6-112E-4683-9C41-3A1281025D4F</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="_13A0DA4C-6531-4279-B10B-2BDB2E4C3896" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_3BB97098-D3E4-4160-9183-BEA6E25BDF78" targetRef="_2560865B-EDE6-4DC9-A89B-394124F746DD"/>
     <bpmn2:scriptTask id="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="delete" scriptFormat="http://www.java.com/java">
@@ -97,7 +100,7 @@ kcontext.setVariable("response",responselocal);]]></bpmn2:script>
           <drools:metaValue><![CDATA[delete]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_YcDCRNy2EeaGVfSlPLHPpw" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "delete");]]></bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_t9q55N4lEear6q0-6IYQPQ" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "delete");]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:scriptTask id="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="not query " scriptFormat="http://www.java.com/java">
       <bpmn2:extensionElements>
@@ -130,8 +133,8 @@ System.out.println("exit workersData process");
           <drools:metaValue><![CDATA[default]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:documentation id="_YcDCRdy2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_YcDCRty2EeaGVfSlPLHPpw"></bpmn2:conditionExpression>
+      <bpmn2:documentation id="_t9q55d4lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_t9q55t4lEear6q0-6IYQPQ"></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:scriptTask id="_B6A35776-6A82-41A2-9186-6E1DE758FDD7" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="get method" scriptFormat="http://www.java.com/java">
       <bpmn2:extensionElements>
@@ -169,21 +172,22 @@ kcontext.setVariable("response",userObjectOutput);
           <drools:metaValue><![CDATA[get]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_YcDCR9y2EeaGVfSlPLHPpw" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "get");]]></bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_t9q5594lEear6q0-6IYQPQ" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "get");]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:exclusiveGateway id="_2664314C-CAF2-42B0-9278-5C327EBD5029" drools:selectable="true" drools:dg="" color:background-color="#f0e68c" color:border-color="#a67f00" color:color="#000000" name="" gatewayDirection="Converging">
-      <bpmn2:incoming>_3E424D0C-604A-435F-AE0B-EFB31713699C</bpmn2:incoming>
       <bpmn2:incoming>_0D9366FD-1AF4-495A-B142-18E0556E0A25</bpmn2:incoming>
-      <bpmn2:incoming>_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40</bpmn2:incoming>
-      <bpmn2:incoming>_C3113030-E36F-4247-BCFF-9121281F1240</bpmn2:incoming>
       <bpmn2:incoming>_9796B0E0-DAAF-4A98-989D-74F6779095BF</bpmn2:incoming>
+      <bpmn2:incoming>_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40</bpmn2:incoming>
+      <bpmn2:incoming>_0CD33C34-66C6-49EB-BD88-9D3F6B35D673</bpmn2:incoming>
+      <bpmn2:incoming>_C3113030-E36F-4247-BCFF-9121281F1240</bpmn2:incoming>
+      <bpmn2:incoming>_3E424D0C-604A-435F-AE0B-EFB31713699C</bpmn2:incoming>
       <bpmn2:outgoing>_424A05AD-15EC-458C-AA62-685E1615767F</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="_3E424D0C-604A-435F-AE0B-EFB31713699C" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63" targetRef="_2664314C-CAF2-42B0-9278-5C327EBD5029">
-      <bpmn2:documentation id="_YcDCSNy2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:documentation id="_t9q56N4lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_9796B0E0-DAAF-4A98-989D-74F6779095BF" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_B6A35776-6A82-41A2-9186-6E1DE758FDD7" targetRef="_2664314C-CAF2-42B0-9278-5C327EBD5029">
-      <bpmn2:documentation id="_YcDCSdy2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:documentation id="_t9q56d4lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
     </bpmn2:sequenceFlow>
     <bpmn2:scriptTask id="_C851F7B6-53CE-4B13-81BB-1349C7284BC7" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="update" scriptFormat="http://www.java.com/java">
       <bpmn2:extensionElements>
@@ -230,10 +234,10 @@ localMap.put(userNameLocal,userObjectOutput);]]></bpmn2:script>
           <drools:metaValue><![CDATA[update]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_YcDCSty2EeaGVfSlPLHPpw" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "update");]]></bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_t9q56t4lEear6q0-6IYQPQ" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "update");]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_0D9366FD-1AF4-495A-B142-18E0556E0A25" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_C851F7B6-53CE-4B13-81BB-1349C7284BC7" targetRef="_2664314C-CAF2-42B0-9278-5C327EBD5029">
-      <bpmn2:documentation id="_YcDCS9y2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:documentation id="_t9q5694lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
     </bpmn2:sequenceFlow>
     <bpmn2:scriptTask id="_F8809801-055A-48F0-A0AF-16DB127350F7" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="query method" scriptFormat="http://www.java.com/java">
       <bpmn2:extensionElements>
@@ -305,11 +309,11 @@ kcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:script>
           <drools:metaValue><![CDATA[query]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:documentation id="_YcDCTNy2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_YcDCTdy2EeaGVfSlPLHPpw" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "query");]]></bpmn2:conditionExpression>
+      <bpmn2:documentation id="_t9q57N4lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_t9q57d4lEear6q0-6IYQPQ" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "query");]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_C3113030-E36F-4247-BCFF-9121281F1240" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_F8809801-055A-48F0-A0AF-16DB127350F7" targetRef="_2664314C-CAF2-42B0-9278-5C327EBD5029">
-      <bpmn2:documentation id="_YcDCTty2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:documentation id="_t9q57t4lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
     </bpmn2:sequenceFlow>
     <bpmn2:scriptTask id="_2D717277-9935-4C5A-BB79-A4A98BAD390E" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="query" scriptFormat="http://www.java.com/java">
       <bpmn2:extensionElements>
@@ -351,7 +355,7 @@ System.out.println(sb.toString());]]></bpmn2:script>
       <bpmn2:incoming>_900BA090-9D26-4811-AF66-5359F1A57F99</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="_900BA090-9D26-4811-AF66-5359F1A57F99" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_2D717277-9935-4C5A-BB79-A4A98BAD390E" targetRef="_7AC72943-AE7D-4EC8-AC6D-503F7EAD0E05">
-      <bpmn2:documentation id="_YcDCT9y2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:documentation id="_t9q5794lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
     </bpmn2:sequenceFlow>
     <bpmn2:exclusiveGateway id="_9C060933-80BB-41ED-9C74-21B9E5B198B4" drools:selectable="true" drools:dg="" color:background-color="#f0e68c" color:border-color="#FF6600" color:color="#000000" name="" gatewayDirection="Diverging">
       <bpmn2:incoming>_9E9CA8BA-AC63-478C-BC35-4CEFAB8AA497</bpmn2:incoming>
@@ -359,12 +363,12 @@ System.out.println(sb.toString());]]></bpmn2:script>
       <bpmn2:outgoing>_107EF45D-C157-4DEF-AFD5-8E17C1E39A34</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="_F373283D-0D13-44EC-872A-2435B1F7D586" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_9C060933-80BB-41ED-9C74-21B9E5B198B4" targetRef="_2D717277-9935-4C5A-BB79-A4A98BAD390E">
-      <bpmn2:documentation id="_YcDCUNy2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_YcDCUdy2EeaGVfSlPLHPpw" language="http://www.java.com/java"><![CDATA[return  (KieFunctions.equalsTo(method, "query"));]]></bpmn2:conditionExpression>
+      <bpmn2:documentation id="_t9q58N4lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_t9q58d4lEear6q0-6IYQPQ" language="http://www.java.com/java"><![CDATA[return  (KieFunctions.equalsTo(method, "query"));]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_107EF45D-C157-4DEF-AFD5-8E17C1E39A34" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_9C060933-80BB-41ED-9C74-21B9E5B198B4" targetRef="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6">
-      <bpmn2:documentation id="_YcDCUty2EeaGVfSlPLHPpw"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_YcDCU9y2EeaGVfSlPLHPpw" language="http://www.java.com/java"><![CDATA[return  !(KieFunctions.equalsTo(method, "query"));]]></bpmn2:conditionExpression>
+      <bpmn2:documentation id="_t9q58t4lEear6q0-6IYQPQ"><![CDATA[java.util.Map<String,com.bravo.management.User> localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");\n\ncom.bravo.management.User userObjectQuery=(com.bravo.management.User)kcontext.getVariable("userObject");\n\n\n\njava.util.List<com.bravo.management.User> usersList=new java.util.ArrayList<com.bravo.management.User>(localMap.values());\n	\n	java.util.List<com.bravo.management.User> qualifiedUsers=new java.util.ArrayList<com.bravo.management.User>();\n\n\nSystem.out.println("++++++++++++++++++++++++++++ query1");\nSystem.out.println("++++++++++++++++++++++++++++ query2 userObjectQuery "+userObjectQuery);\n\n\n	for (int i=0;i<usersList.size();i++){\n      boolean match=true;\n      com.bravo.management.User userElement=usersList.get(i);\n	  System.out.println("++++++++++++++++++++++++++++ checking iteration: "+ i+" user element: "+userElement); \n	  \n	  \n      if (userObjectQuery.getUserId()!=null){\n        if( userObjectQuery.getUserId().equals(userElement.getUserId()) ){\n			match=false;\n		}\n      }\n       if (userObjectQuery.getDepartment()!=null){\n        if( userObjectQuery.getDepartment().equals(userElement.getDepartment()) ){\n			match=false;\n		}\n      }\n      \n	   if (userObjectQuery.getStatus()!=null){\n        if( userObjectQuery.getStatus().equals(userElement.getStatus()) ){\n			match=false;\n		}\n      }\n	  \n\n      	   if (userObjectQuery.getShiftExpirationTime()!=null){\n        if( userElement.getShiftExpirationTime()==null || userObjectQuery.getShiftExpirationTime().after(userElement.getShiftExpirationTime()) ){\n			match=false;\n		}\n      }\n      \n	  System.out.println("++++++++++++++++++++++++++++ query2 match"+match +"\\n\\n\\n");\n	  \n      if(match){\n        qualifiedUsers.add(userElement);\n      }\n	}\n\n	System.out.println("++++++++++++++++++++++++++++ qualifiedUsers" + qualifiedUsers);\n	\nkcontext.setVariable("queryResponse",qualifiedUsers);]]></bpmn2:documentation>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_t9q5894lEear6q0-6IYQPQ" language="http://www.java.com/java"><![CDATA[return  !(KieFunctions.equalsTo(method, "query"));]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:endEvent id="_E01A815C-698C-4616-A01B-5AB0B63F8289" drools:selectable="true" color:background-color="#ff6347" color:border-color="#000000" color:color="#000000" name="">
       <bpmn2:extensionElements>
@@ -401,138 +405,222 @@ for (int i=0;i<entryList.size();i++){
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="_424A05AD-15EC-458C-AA62-685E1615767F" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_2664314C-CAF2-42B0-9278-5C327EBD5029" targetRef="_3F06051F-FF51-48FC-9953-201C14067A5A"/>
     <bpmn2:sequenceFlow id="_9E9CA8BA-AC63-478C-BC35-4CEFAB8AA497" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_3F06051F-FF51-48FC-9953-201C14067A5A" targetRef="_9C060933-80BB-41ED-9C74-21B9E5B198B4"/>
+    <bpmn2:scriptTask id="_84245A9A-6BDD-4C60-BBC8-4051947E6F6E" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="batch Update" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[batch Update]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_482869A6-112E-4683-9C41-3A1281025D4F</bpmn2:incoming>
+      <bpmn2:outgoing>_0CD33C34-66C6-49EB-BD88-9D3F6B35D673</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[
+
+
+
+
+
+
+
+java.util.Map localMap=(java.util.Map)kcontext.getKnowledgeRuntime().getGlobal("workersMap");
+
+
+
+List<com.bravo.management.User userObjectInput> usersList =(com.bravo.management.User)kcontext.getVariable("userObjectList");
+
+if (usersList==null){
+System.out.println("userObjectList is null; no update done);
+} else{
+
+	for(int i=0;i<usersList.size();i++){
+
+		userObjectInput=usersList.get(i);
+
+		String userNameLocal=userObjectInput.getUserId();
+
+		com.bravo.management.User userObjectOutput=(com.bravo.management.User)localMap.get(userNameLocal);
+
+		System.out.println("+++++++++++++++++++ userObjectBeforeupdate:"+userObjectOutput);
+		System.out.println("+++++++++++++++++++ userNameLocal:"+userNameLocal);
+
+		if (userObjectOutput==null){
+		 userObjectOutput=new com.bravo.management.User();
+		 userObjectOutput.setUserId(userNameLocal);
+		 localMap.put(userNameLocal,userObjectOutput);
+		}
+
+		if(userObjectInput.getDepartment()!=null){
+		  userObjectOutput.setDepartment(userObjectInput.getDepartment());
+		}
+
+		if(userObjectInput.getStatus()!=null){
+		  userObjectOutput.setStatus(userObjectInput.getStatus());
+		}
+
+		if(userObjectInput.getShiftExpirationTime()!=null){
+		  userObjectOutput.setShiftExpirationTime(userObjectInput.getShiftExpirationTime());
+		}
+
+
+		localMap.put(userNameLocal,userObjectOutput);
+
+	}
+}
+
+
+]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="_482869A6-112E-4683-9C41-3A1281025D4F" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" name="batchUpdate" sourceRef="_2560865B-EDE6-4DC9-A89B-394124F746DD" targetRef="_84245A9A-6BDD-4C60-BBC8-4051947E6F6E">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[batchUpdate]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_t9rg8N4lEear6q0-6IYQPQ" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(method, "batchUpdate");]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_0CD33C34-66C6-49EB-BD88-9D3F6B35D673" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_84245A9A-6BDD-4C60-BBC8-4051947E6F6E" targetRef="_2664314C-CAF2-42B0-9278-5C327EBD5029"/>
   </bpmn2:process>
-  <bpmndi:BPMNDiagram id="_YcDCVNy2EeaGVfSlPLHPpw">
-    <bpmndi:BPMNPlane id="_YcDCVdy2EeaGVfSlPLHPpw" bpmnElement="HotelManagement.workersData">
-      <bpmndi:BPMNShape id="_YcDCVty2EeaGVfSlPLHPpw" bpmnElement="processStartEvent">
+  <bpmndi:BPMNDiagram id="_t9rg8d4lEear6q0-6IYQPQ">
+    <bpmndi:BPMNPlane id="_t9rg8t4lEear6q0-6IYQPQ" bpmnElement="HotelManagement.workersData">
+      <bpmndi:BPMNShape id="_t9rg894lEear6q0-6IYQPQ" bpmnElement="processStartEvent">
         <dc:Bounds height="30.0" width="30.0" x="17.0" y="159.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCV9y2EeaGVfSlPLHPpw" bpmnElement="_3BB97098-D3E4-4160-9183-BEA6E25BDF78">
+      <bpmndi:BPMNShape id="_t9rg9N4lEear6q0-6IYQPQ" bpmnElement="_3BB97098-D3E4-4160-9183-BEA6E25BDF78">
         <dc:Bounds height="80.0" width="100.0" x="107.0" y="134.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCWNy2EeaGVfSlPLHPpw" bpmnElement="_2560865B-EDE6-4DC9-A89B-394124F746DD">
+      <bpmndi:BPMNShape id="_t9rg9d4lEear6q0-6IYQPQ" bpmnElement="_2560865B-EDE6-4DC9-A89B-394124F746DD">
         <dc:Bounds height="40.0" width="40.0" x="317.0" y="164.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCWdy2EeaGVfSlPLHPpw" bpmnElement="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63">
+      <bpmndi:BPMNShape id="_t9rg9t4lEear6q0-6IYQPQ" bpmnElement="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63">
         <dc:Bounds height="80.0" width="100.0" x="467.0" y="149.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCWty2EeaGVfSlPLHPpw" bpmnElement="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6">
+      <bpmndi:BPMNShape id="_t9rg994lEear6q0-6IYQPQ" bpmnElement="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6">
         <dc:Bounds height="80.0" width="100.0" x="990.0" y="150.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCW9y2EeaGVfSlPLHPpw" bpmnElement="_B6A35776-6A82-41A2-9186-6E1DE758FDD7">
+      <bpmndi:BPMNShape id="_t9rg-N4lEear6q0-6IYQPQ" bpmnElement="_B6A35776-6A82-41A2-9186-6E1DE758FDD7">
         <dc:Bounds height="80.0" width="100.0" x="482.0" y="44.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCXNy2EeaGVfSlPLHPpw" bpmnElement="_2664314C-CAF2-42B0-9278-5C327EBD5029">
+      <bpmndi:BPMNShape id="_t9rg-d4lEear6q0-6IYQPQ" bpmnElement="_2664314C-CAF2-42B0-9278-5C327EBD5029">
         <dc:Bounds height="40.0" width="40.0" x="662.0" y="174.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCXdy2EeaGVfSlPLHPpw" bpmnElement="_C851F7B6-53CE-4B13-81BB-1349C7284BC7">
+      <bpmndi:BPMNShape id="_t9rg-t4lEear6q0-6IYQPQ" bpmnElement="_C851F7B6-53CE-4B13-81BB-1349C7284BC7">
         <dc:Bounds height="80.0" width="100.0" x="465.0" y="240.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCXty2EeaGVfSlPLHPpw" bpmnElement="_F8809801-055A-48F0-A0AF-16DB127350F7">
+      <bpmndi:BPMNShape id="_t9rg-94lEear6q0-6IYQPQ" bpmnElement="_F8809801-055A-48F0-A0AF-16DB127350F7">
         <dc:Bounds height="80.0" width="100.0" x="467.0" y="389.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCX9y2EeaGVfSlPLHPpw" bpmnElement="_2D717277-9935-4C5A-BB79-A4A98BAD390E">
+      <bpmndi:BPMNShape id="_t9rg_N4lEear6q0-6IYQPQ" bpmnElement="_2D717277-9935-4C5A-BB79-A4A98BAD390E">
         <dc:Bounds height="80.0" width="100.0" x="992.0" y="254.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCYNy2EeaGVfSlPLHPpw" bpmnElement="_7AC72943-AE7D-4EC8-AC6D-503F7EAD0E05">
+      <bpmndi:BPMNShape id="_t9rg_d4lEear6q0-6IYQPQ" bpmnElement="_7AC72943-AE7D-4EC8-AC6D-503F7EAD0E05">
         <dc:Bounds height="28.0" width="28.0" x="1127.0" y="280.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCYdy2EeaGVfSlPLHPpw" bpmnElement="_9C060933-80BB-41ED-9C74-21B9E5B198B4">
+      <bpmndi:BPMNShape id="_t9rg_t4lEear6q0-6IYQPQ" bpmnElement="_9C060933-80BB-41ED-9C74-21B9E5B198B4">
         <dc:Bounds height="40.0" width="40.0" x="885.0" y="174.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCYty2EeaGVfSlPLHPpw" bpmnElement="_E01A815C-698C-4616-A01B-5AB0B63F8289">
+      <bpmndi:BPMNShape id="_t9rg_94lEear6q0-6IYQPQ" bpmnElement="_E01A815C-698C-4616-A01B-5AB0B63F8289">
         <dc:Bounds height="28.0" width="28.0" x="1135.0" y="176.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_YcDCY9y2EeaGVfSlPLHPpw" bpmnElement="_3F06051F-FF51-48FC-9953-201C14067A5A">
+      <bpmndi:BPMNShape id="_t9rhAN4lEear6q0-6IYQPQ" bpmnElement="_3F06051F-FF51-48FC-9953-201C14067A5A">
         <dc:Bounds height="80.0" width="100.0" x="735.0" y="150.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="_YcDCZNy2EeaGVfSlPLHPpw" bpmnElement="_ADD408A6-81FD-4E99-8A83-C7F1610526BD" sourceElement="_YcDCVty2EeaGVfSlPLHPpw" targetElement="_YcDCV9y2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNShape id="_t9rhAd4lEear6q0-6IYQPQ" bpmnElement="_84245A9A-6BDD-4C60-BBC8-4051947E6F6E">
+        <dc:Bounds height="80.0" width="100.0" x="480.0" y="555.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_t9rhAt4lEear6q0-6IYQPQ" bpmnElement="_ADD408A6-81FD-4E99-8A83-C7F1610526BD" sourceElement="_t9rg894lEear6q0-6IYQPQ" targetElement="_t9rg9N4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="32.0" y="174.0"/>
         <di:waypoint xsi:type="dc:Point" x="157.0" y="174.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCZdy2EeaGVfSlPLHPpw" bpmnElement="_13A0DA4C-6531-4279-B10B-2BDB2E4C3896" sourceElement="_YcDCV9y2EeaGVfSlPLHPpw" targetElement="_YcDCWNy2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhA94lEear6q0-6IYQPQ" bpmnElement="_13A0DA4C-6531-4279-B10B-2BDB2E4C3896" sourceElement="_t9rg9N4lEear6q0-6IYQPQ" targetElement="_t9rg9d4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="157.0" y="174.0"/>
         <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCZty2EeaGVfSlPLHPpw" bpmnElement="_FDCD84B2-6C0D-49FC-BFCA-63C04560FDA7" sourceElement="_YcDCWNy2EeaGVfSlPLHPpw" targetElement="_YcDCWdy2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhBN4lEear6q0-6IYQPQ" bpmnElement="_FDCD84B2-6C0D-49FC-BFCA-63C04560FDA7" sourceElement="_t9rg9d4lEear6q0-6IYQPQ" targetElement="_t9rg9t4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
         <di:waypoint xsi:type="dc:Point" x="517.0" y="189.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCZ9y2EeaGVfSlPLHPpw" bpmnElement="_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40" sourceElement="_YcDCWNy2EeaGVfSlPLHPpw" targetElement="_YcDCXNy2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhBd4lEear6q0-6IYQPQ" bpmnElement="_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40" sourceElement="_t9rg9d4lEear6q0-6IYQPQ" targetElement="_t9rg-d4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
-        <di:waypoint xsi:type="dc:Point" x="337.0" y="530.0"/>
-        <di:waypoint xsi:type="dc:Point" x="682.0" y="530.0"/>
+        <di:waypoint xsi:type="dc:Point" x="360.0" y="720.0"/>
+        <di:waypoint xsi:type="dc:Point" x="682.0" y="720.0"/>
         <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCaNy2EeaGVfSlPLHPpw" bpmnElement="_70F0A233-4059-4F19-B9F2-EB32CD3761F4" sourceElement="_YcDCWNy2EeaGVfSlPLHPpw" targetElement="_YcDCW9y2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhBt4lEear6q0-6IYQPQ" bpmnElement="_70F0A233-4059-4F19-B9F2-EB32CD3761F4" sourceElement="_t9rg9d4lEear6q0-6IYQPQ" targetElement="_t9rg-N4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
         <di:waypoint xsi:type="dc:Point" x="456.0" y="126.0"/>
         <di:waypoint xsi:type="dc:Point" x="532.0" y="84.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCady2EeaGVfSlPLHPpw" bpmnElement="_3E424D0C-604A-435F-AE0B-EFB31713699C" sourceElement="_YcDCWdy2EeaGVfSlPLHPpw" targetElement="_YcDCXNy2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhB94lEear6q0-6IYQPQ" bpmnElement="_3E424D0C-604A-435F-AE0B-EFB31713699C" sourceElement="_t9rg9t4lEear6q0-6IYQPQ" targetElement="_t9rg-d4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="517.0" y="189.0"/>
         <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCaty2EeaGVfSlPLHPpw" bpmnElement="_9796B0E0-DAAF-4A98-989D-74F6779095BF" sourceElement="_YcDCW9y2EeaGVfSlPLHPpw" targetElement="_YcDCXNy2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhCN4lEear6q0-6IYQPQ" bpmnElement="_9796B0E0-DAAF-4A98-989D-74F6779095BF" sourceElement="_t9rg-N4lEear6q0-6IYQPQ" targetElement="_t9rg-d4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="532.0" y="84.0"/>
         <di:waypoint xsi:type="dc:Point" x="682.0" y="84.0"/>
         <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCa9y2EeaGVfSlPLHPpw" bpmnElement="_09BF6461-739E-4549-8C7B-3E5E1ED3ADF5" sourceElement="_YcDCWNy2EeaGVfSlPLHPpw" targetElement="_YcDCXdy2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhCd4lEear6q0-6IYQPQ" bpmnElement="_09BF6461-739E-4549-8C7B-3E5E1ED3ADF5" sourceElement="_t9rg9d4lEear6q0-6IYQPQ" targetElement="_t9rg-t4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
         <di:waypoint xsi:type="dc:Point" x="515.0" y="280.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCbNy2EeaGVfSlPLHPpw" bpmnElement="_0D9366FD-1AF4-495A-B142-18E0556E0A25" sourceElement="_YcDCXdy2EeaGVfSlPLHPpw" targetElement="_YcDCXNy2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhCt4lEear6q0-6IYQPQ" bpmnElement="_0D9366FD-1AF4-495A-B142-18E0556E0A25" sourceElement="_t9rg-t4lEear6q0-6IYQPQ" targetElement="_t9rg-d4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="515.0" y="280.0"/>
         <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCbdy2EeaGVfSlPLHPpw" bpmnElement="_CB19EE78-48D4-4EA6-A1A2-A0C41699E529" sourceElement="_YcDCWNy2EeaGVfSlPLHPpw" targetElement="_YcDCXty2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhC94lEear6q0-6IYQPQ" bpmnElement="_CB19EE78-48D4-4EA6-A1A2-A0C41699E529" sourceElement="_t9rg9d4lEear6q0-6IYQPQ" targetElement="_t9rg-94lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
         <di:waypoint xsi:type="dc:Point" x="517.0" y="429.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCbty2EeaGVfSlPLHPpw" bpmnElement="_C3113030-E36F-4247-BCFF-9121281F1240" sourceElement="_YcDCXty2EeaGVfSlPLHPpw" targetElement="_YcDCXNy2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhDN4lEear6q0-6IYQPQ" bpmnElement="_C3113030-E36F-4247-BCFF-9121281F1240" sourceElement="_t9rg-94lEear6q0-6IYQPQ" targetElement="_t9rg-d4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="517.0" y="429.0"/>
         <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCb9y2EeaGVfSlPLHPpw" bpmnElement="_900BA090-9D26-4811-AF66-5359F1A57F99" sourceElement="_YcDCX9y2EeaGVfSlPLHPpw" targetElement="_YcDCYNy2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhDd4lEear6q0-6IYQPQ" bpmnElement="_900BA090-9D26-4811-AF66-5359F1A57F99" sourceElement="_t9rg_N4lEear6q0-6IYQPQ" targetElement="_t9rg_d4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="1042.0" y="294.0"/>
         <di:waypoint xsi:type="dc:Point" x="1141.0" y="294.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCcNy2EeaGVfSlPLHPpw" bpmnElement="_F373283D-0D13-44EC-872A-2435B1F7D586" sourceElement="_YcDCYdy2EeaGVfSlPLHPpw" targetElement="_YcDCX9y2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhDt4lEear6q0-6IYQPQ" bpmnElement="_F373283D-0D13-44EC-872A-2435B1F7D586" sourceElement="_t9rg_t4lEear6q0-6IYQPQ" targetElement="_t9rg_N4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="905.0" y="194.0"/>
         <di:waypoint xsi:type="dc:Point" x="1042.0" y="294.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCcdy2EeaGVfSlPLHPpw" bpmnElement="_107EF45D-C157-4DEF-AFD5-8E17C1E39A34" sourceElement="_YcDCYdy2EeaGVfSlPLHPpw" targetElement="_YcDCWty2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhD94lEear6q0-6IYQPQ" bpmnElement="_107EF45D-C157-4DEF-AFD5-8E17C1E39A34" sourceElement="_t9rg_t4lEear6q0-6IYQPQ" targetElement="_t9rg994lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="905.0" y="194.0"/>
         <di:waypoint xsi:type="dc:Point" x="1040.0" y="190.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCcty2EeaGVfSlPLHPpw" bpmnElement="_1C7AFDF6-C952-49A3-912D-C1361459991A" sourceElement="_YcDCWty2EeaGVfSlPLHPpw" targetElement="_YcDCYty2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhEN4lEear6q0-6IYQPQ" bpmnElement="_1C7AFDF6-C952-49A3-912D-C1361459991A" sourceElement="_t9rg994lEear6q0-6IYQPQ" targetElement="_t9rg_94lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="1040.0" y="190.0"/>
         <di:waypoint xsi:type="dc:Point" x="1149.0" y="190.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCc9y2EeaGVfSlPLHPpw" bpmnElement="_424A05AD-15EC-458C-AA62-685E1615767F" sourceElement="_YcDCXNy2EeaGVfSlPLHPpw" targetElement="_YcDCY9y2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhEd4lEear6q0-6IYQPQ" bpmnElement="_424A05AD-15EC-458C-AA62-685E1615767F" sourceElement="_t9rg-d4lEear6q0-6IYQPQ" targetElement="_t9rhAN4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
         <di:waypoint xsi:type="dc:Point" x="785.0" y="190.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_YcDCdNy2EeaGVfSlPLHPpw" bpmnElement="_9E9CA8BA-AC63-478C-BC35-4CEFAB8AA497" sourceElement="_YcDCY9y2EeaGVfSlPLHPpw" targetElement="_YcDCYdy2EeaGVfSlPLHPpw">
+      <bpmndi:BPMNEdge id="_t9rhEt4lEear6q0-6IYQPQ" bpmnElement="_9E9CA8BA-AC63-478C-BC35-4CEFAB8AA497" sourceElement="_t9rhAN4lEear6q0-6IYQPQ" targetElement="_t9rg_t4lEear6q0-6IYQPQ">
         <di:waypoint xsi:type="dc:Point" x="785.0" y="190.0"/>
         <di:waypoint xsi:type="dc:Point" x="905.0" y="194.0"/>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_t9rhE94lEear6q0-6IYQPQ" bpmnElement="_482869A6-112E-4683-9C41-3A1281025D4F" sourceElement="_t9rg9d4lEear6q0-6IYQPQ" targetElement="_t9rhAd4lEear6q0-6IYQPQ">
+        <di:waypoint xsi:type="dc:Point" x="337.0" y="184.0"/>
+        <di:waypoint xsi:type="dc:Point" x="530.0" y="595.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_t9rhFN4lEear6q0-6IYQPQ" bpmnElement="_0CD33C34-66C6-49EB-BD88-9D3F6B35D673" sourceElement="_t9rhAd4lEear6q0-6IYQPQ" targetElement="_t9rg-d4lEear6q0-6IYQPQ">
+        <di:waypoint xsi:type="dc:Point" x="530.0" y="595.0"/>
+        <di:waypoint xsi:type="dc:Point" x="682.0" y="194.0"/>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_YcDCddy2EeaGVfSlPLHPpw" type="BPSimData">
+  <bpmn2:relationship id="_t9rhFd4lEear6q0-6IYQPQ" type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
           <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="min"/>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_3E424D0C-604A-435F-AE0B-EFB31713699C" id="_YcDCdty2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_3E424D0C-604A-435F-AE0B-EFB31713699C" id="_t9rhFt4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C851F7B6-53CE-4B13-81BB-1349C7284BC7" id="_YcDCd9y2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C851F7B6-53CE-4B13-81BB-1349C7284BC7" id="_t9rhF94lEear6q0-6IYQPQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -544,28 +632,28 @@ for (int i=0;i<entryList.size();i++){
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_9796B0E0-DAAF-4A98-989D-74F6779095BF" id="_YcDCeNy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_9796B0E0-DAAF-4A98-989D-74F6779095BF" id="_t9rhGN4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F373283D-0D13-44EC-872A-2435B1F7D586" id="_YcDCedy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F373283D-0D13-44EC-872A-2435B1F7D586" id="_t9rhGd4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C3113030-E36F-4247-BCFF-9121281F1240" id="_YcDCety2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C3113030-E36F-4247-BCFF-9121281F1240" id="_t9rhGt4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6" id="_YcDCe9y2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C1364942-3C7A-4D3E-BB19-4D29A89A40F6" id="_t9rhG94lEear6q0-6IYQPQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -577,14 +665,14 @@ for (int i=0;i<entryList.size();i++){
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_424A05AD-15EC-458C-AA62-685E1615767F" id="_YcDCfNy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_424A05AD-15EC-458C-AA62-685E1615767F" id="_t9rhHN4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_2D717277-9935-4C5A-BB79-A4A98BAD390E" id="_YcDCfdy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_2D717277-9935-4C5A-BB79-A4A98BAD390E" id="_t9rhHd4lEear6q0-6IYQPQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -596,56 +684,70 @@ for (int i=0;i<entryList.size();i++){
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_FDCD84B2-6C0D-49FC-BFCA-63C04560FDA7" id="_YcDCfty2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_482869A6-112E-4683-9C41-3A1281025D4F" id="_t9rhHt4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_13A0DA4C-6531-4279-B10B-2BDB2E4C3896" id="_YcDCf9y2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_FDCD84B2-6C0D-49FC-BFCA-63C04560FDA7" id="_t9rhH94lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_107EF45D-C157-4DEF-AFD5-8E17C1E39A34" id="_YcDCgNy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_13A0DA4C-6531-4279-B10B-2BDB2E4C3896" id="_t9rhIN4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_9E9CA8BA-AC63-478C-BC35-4CEFAB8AA497" id="_YcDCgdy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_107EF45D-C157-4DEF-AFD5-8E17C1E39A34" id="_t9rhId4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_09BF6461-739E-4549-8C7B-3E5E1ED3ADF5" id="_YcDCgty2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_9E9CA8BA-AC63-478C-BC35-4CEFAB8AA497" id="_t9rhIt4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_ADD408A6-81FD-4E99-8A83-C7F1610526BD" id="_YcDCg9y2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_0CD33C34-66C6-49EB-BD88-9D3F6B35D673" id="_t9rhI94lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40" id="_YcDChNy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_09BF6461-739E-4549-8C7B-3E5E1ED3ADF5" id="_t9rhJN4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_3F06051F-FF51-48FC-9953-201C14067A5A" id="_YcDChdy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_ADD408A6-81FD-4E99-8A83-C7F1610526BD" id="_t9rhJd4lEear6q0-6IYQPQ">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_8F863FFC-2ED8-46EF-8DE4-E3FF6A3FAB40" id="_t9rhJt4lEear6q0-6IYQPQ">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_3F06051F-FF51-48FC-9953-201C14067A5A" id="_t9rhJ94lEear6q0-6IYQPQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -657,28 +759,28 @@ for (int i=0;i<entryList.size();i++){
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_0D9366FD-1AF4-495A-B142-18E0556E0A25" id="_YcDChty2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_0D9366FD-1AF4-495A-B142-18E0556E0A25" id="_t9rhKN4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_70F0A233-4059-4F19-B9F2-EB32CD3761F4" id="_YcDCh9y2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_70F0A233-4059-4F19-B9F2-EB32CD3761F4" id="_t9rhKd4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_CB19EE78-48D4-4EA6-A1A2-A0C41699E529" id="_YcDCiNy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_CB19EE78-48D4-4EA6-A1A2-A0C41699E529" id="_t9rhKt4lEear6q0-6IYQPQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_YcDCidy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_t9rhK94lEear6q0-6IYQPQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -690,19 +792,7 @@ for (int i=0;i<entryList.size();i++){
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F8809801-055A-48F0-A0AF-16DB127350F7" id="_YcDCity2EeaGVfSlPLHPpw">
-            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
-              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
-                <bpsim:UniformDistribution max="10.0" min="5.0"/>
-              </bpsim:ProcessingTime>
-            </bpsim:TimeParameters>
-            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
-              <bpsim:UnitCost xsi:type="bpsim:Parameter">
-                <bpsim:FloatingParameter value="0.0"/>
-              </bpsim:UnitCost>
-            </bpsim:CostParameters>
-          </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_B6A35776-6A82-41A2-9186-6E1DE758FDD7" id="_YcDCi9y2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F8809801-055A-48F0-A0AF-16DB127350F7" id="_t9rhLN4lEear6q0-6IYQPQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -714,14 +804,7 @@ for (int i=0;i<entryList.size();i++){
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_E01A815C-698C-4616-A01B-5AB0B63F8289" id="_YcDCjNy2EeaGVfSlPLHPpw">
-            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
-              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
-                <bpsim:UniformDistribution max="10.0" min="5.0"/>
-              </bpsim:ProcessingTime>
-            </bpsim:TimeParameters>
-          </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_3BB97098-D3E4-4160-9183-BEA6E25BDF78" id="_YcDCjdy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_B6A35776-6A82-41A2-9186-6E1DE758FDD7" id="_t9rhLd4lEear6q0-6IYQPQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -733,28 +816,59 @@ for (int i=0;i<entryList.size();i++){
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_1C7AFDF6-C952-49A3-912D-C1361459991A" id="_YcDCjty2EeaGVfSlPLHPpw">
-            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
-              <bpsim:Probability xsi:type="bpsim:Parameter">
-                <bpsim:FloatingParameter value="100.0"/>
-              </bpsim:Probability>
-            </bpsim:ControlParameters>
-          </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_900BA090-9D26-4811-AF66-5359F1A57F99" id="_YcDCj9y2EeaGVfSlPLHPpw">
-            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
-              <bpsim:Probability xsi:type="bpsim:Parameter">
-                <bpsim:FloatingParameter value="100.0"/>
-              </bpsim:Probability>
-            </bpsim:ControlParameters>
-          </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_7AC72943-AE7D-4EC8-AC6D-503F7EAD0E05" id="_YcDCkNy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_E01A815C-698C-4616-A01B-5AB0B63F8289" id="_t9rhLt4lEear6q0-6IYQPQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63" id="_YcDCkdy2EeaGVfSlPLHPpw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_3BB97098-D3E4-4160-9183-BEA6E25BDF78" id="_t9rhL94lEear6q0-6IYQPQ">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_84245A9A-6BDD-4C60-BBC8-4051947E6F6E" id="_t9rhMN4lEear6q0-6IYQPQ">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_1C7AFDF6-C952-49A3-912D-C1361459991A" id="_t9rhMd4lEear6q0-6IYQPQ">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_900BA090-9D26-4811-AF66-5359F1A57F99" id="_t9rhMt4lEear6q0-6IYQPQ">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_7AC72943-AE7D-4EC8-AC6D-503F7EAD0E05" id="_t9rhM94lEear6q0-6IYQPQ">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_D6F789BB-EDB8-4047-9A9F-6FE6AEE47C63" id="_t9rhNN4lEear6q0-6IYQPQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -769,7 +883,7 @@ for (int i=0;i<entryList.size();i++){
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_YcDCQNy2EeaGVfSlPLHPpw</bpmn2:source>
-    <bpmn2:target>_YcDCQNy2EeaGVfSlPLHPpw</bpmn2:target>
+    <bpmn2:source>_t9q54N4lEear6q0-6IYQPQ</bpmn2:source>
+    <bpmn2:target>_t9q54N4lEear6q0-6IYQPQ</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
