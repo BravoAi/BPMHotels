@@ -60,5 +60,11 @@ public class jobCategoryObject implements java.io.Serializable
       this.name = name;
       this.iconURL = iconURL;
    }
-
+    
+    public String toString(){
+       String str="id: "+id;
+       str+="  name: "+ name;
+      str+="  iconURL: "+ iconURL;
+      return str;
+   }
 }
