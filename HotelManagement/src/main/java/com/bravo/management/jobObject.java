@@ -309,4 +309,19 @@ public class jobObject implements java.io.Serializable
       this.division = division;
    }
 
+    public String toString(){
+      String str="id:"+id;
+      str+="  type:"+ type;
+      str+="  isUrgent?:"+ isUrgent;
+      str+="  standardTime:"+ standardTime;
+      str+="  location:"+ location;
+      str+="  contactPersonName:"+ contactPersonName;
+      str+="  isContactIsGuest:"+ isContactIsGuest;
+      str+="  title:"+ title;
+      str+="  description:"+ description;
+      str+="  division:"+ division;
+      str+="  location:"+ location;
+      str+="  status:"+ status;
+      return str;
+   }
 }
