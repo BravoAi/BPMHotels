@@ -310,8 +310,8 @@ public class jobObject implements java.io.Serializable
    }
 
     public String toString(){
-      String str="location:"+location;
-      /*str+="  type:"+ type;
+      String str="id:"+id;
+      str+="  type:"+ type;
       str+="  isUrgent?:"+ isUrgent;
       str+="  standardTime:"+ standardTime;
       str+="  location:"+ location;
@@ -321,7 +321,7 @@ public class jobObject implements java.io.Serializable
       str+="  description:"+ description;
       str+="  division:"+ division;
       str+="  location:"+ location;
-      str+="  status:"+ status;*/
+      str+="  status:"+ status;
       return str;
    }
 }
