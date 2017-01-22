@@ -40,8 +40,7 @@ public class jobCategoryObject implements java.io.Serializable
 
    public String toString()
    {
-      String str = "id: " + id;
-      str += "  name: " + name;
+      String str = "name: " + name;
       str += "  iconURL: " + iconURL;
       return str;
    }
