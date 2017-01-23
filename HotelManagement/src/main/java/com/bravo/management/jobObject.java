@@ -58,6 +58,8 @@ public class jobObject implements java.io.Serializable
 
    private java.lang.String division;
 
+   private java.lang.Boolean isLate;
+
    public jobObject()
    {
    }
@@ -273,18 +275,47 @@ public class jobObject implements java.io.Serializable
       this.division = division;
    }
 
+   public String toString()
+   {
+      String str = "id:" + id;
+      str += "  type:" + type;
+      str += "  isUrgent?:" + isUrgent;
+      str += "  standardTime:" + standardTime;
+      str += "  location:" + location;
+      str += "  contactPersonName:" + contactPersonName;
+      str += "  isContactIsGuest:" + isContactIsGuest;
+      str += "  title:" + title;
+      str += "  description:" + description;
+      str += "  division:" + division;
+      str += "  location:" + location;
+      str += "  status:" + status;
+      return str;
+   }
+
+   public java.lang.Boolean getIsLate()
+   {
+      return this.isLate;
+   }
+
+   public void setIsLate(java.lang.Boolean isLate)
+   {
+      this.isLate = isLate;
+   }
+
    public jobObject(java.lang.Long id, java.lang.String type,
          java.lang.String typeIconUrl, java.lang.Boolean isUrgent,
-         java.lang.Boolean urgentIconUrl, com.bravo.management.User assignedTo,
-         java.lang.Boolean isResultInRoomClosed, java.lang.Boolean isCritical,
-         java.lang.Integer standardTime, java.lang.String location,
-         java.lang.String contactPersonName, java.lang.Boolean isContactIsGuest,
+         java.lang.Boolean urgentIconUrl,
+         com.bravo.management.User assignedTo,
+         java.lang.Boolean isResultInRoomClosed,
+         java.lang.Boolean isCritical, java.lang.Integer standardTime,
+         java.lang.String location, java.lang.String contactPersonName,
+         java.lang.Boolean isContactIsGuest,
          com.bravo.management.jobCategoryObject category,
          com.bravo.management.jobCategoryObject subCategory,
          java.lang.String categoryIconUrl, java.lang.String title,
          java.lang.String description, java.lang.String status,
          java.math.BigInteger parentJobID, java.math.BigInteger childJobID,
-         java.lang.String division)
+         java.lang.String division, java.lang.Boolean isLate)
    {
       this.id = id;
       this.type = type;
@@ -307,21 +338,6 @@ public class jobObject implements java.io.Serializable
       this.parentJobID = parentJobID;
       this.childJobID = childJobID;
       this.division = division;
-   }
-
-    public String toString(){
-      String str="id:"+id;
-      str+="  type:"+ type;
-      str+="  isUrgent?:"+ isUrgent;
-      str+="  standardTime:"+ standardTime;
-      str+="  location:"+ location;
-      str+="  contactPersonName:"+ contactPersonName;
-      str+="  isContactIsGuest:"+ isContactIsGuest;
-      str+="  title:"+ title;
-      str+="  description:"+ description;
-      str+="  division:"+ division;
-      str+="  location:"+ location;
-      str+="  status:"+ status;
-      return str;
+      this.isLate = isLate;
    }
 }
