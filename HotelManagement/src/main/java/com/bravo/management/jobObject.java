@@ -289,6 +289,7 @@ public class jobObject implements java.io.Serializable
       str += "  division:" + division;
       str += "  location:" + location;
       str += "  status:" + status;
+      str += "  isLate?" + isLate;
       return str;
    }
 
