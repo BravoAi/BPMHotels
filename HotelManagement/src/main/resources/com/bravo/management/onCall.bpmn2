@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_SHFl0OMNEea4-PBTWsGeVQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_lzqPYOMTEea4-PBTWsGeVQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
   <bpmn2:itemDefinition id="_taskOwnerItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_primaryItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_workersResponseItem" structureRef="java.util.List"/>
@@ -37,15 +37,16 @@ kcontext.setVariable("userQuery",user);
 kcontext.setVariable("callerMethod","query");
 java.util.List maintenanceWorkersList=(java.util.List)kcontext.getVariable("workersResponse"):
 
-kcontext.setVariable("isMaintenanceAgentExists",maintenanceWorkersList.size());
+kcontext.setVariable("isMaintenanceAgentExists",maintenanceWorkersList.size()>0);
                      
 
 ]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="_916164D4-C6DF-4703-9A9C-03BC4F50493F" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="_8F49DF2F-E45E-49F0-9E3D-B78F17D76CAE"/>
-    <bpmn2:exclusiveGateway id="_280C2CD6-68F2-4680-950E-20A2D898EF37" drools:selectable="true" drools:dg="" color:background-color="#f0e68c" color:border-color="#a67f00" color:color="#000000" name="">
+    <bpmn2:exclusiveGateway id="_280C2CD6-68F2-4680-950E-20A2D898EF37" drools:selectable="true" drools:dg="" color:background-color="#f0e68c" color:border-color="#a67f00" color:color="#000000" name="" gatewayDirection="Diverging">
       <bpmn2:incoming>_F9DEAFC9-8194-4854-B73C-C8F82862E67D</bpmn2:incoming>
       <bpmn2:outgoing>_DBB2A836-94EA-47EC-BEB7-7506EEAF6D13</bpmn2:outgoing>
+      <bpmn2:outgoing>_9E1461B4-E91E-4C4B-B766-920A52A3E693</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:callActivity id="_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1" drools:selectable="true" drools:independent="true" drools:waitForCompletion="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="">
       <bpmn2:extensionElements>
@@ -55,27 +56,27 @@ kcontext.setVariable("isMaintenanceAgentExists",maintenanceWorkersList.size());
       </bpmn2:extensionElements>
       <bpmn2:incoming>_E53EA28B-378F-439E-9971-D4EB31A7C4AE</bpmn2:incoming>
       <bpmn2:outgoing>_F9DEAFC9-8194-4854-B73C-C8F82862E67D</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="_SHFl0eMNEea4-PBTWsGeVQ">
+      <bpmn2:ioSpecification id="_lzqPYeMTEea4-PBTWsGeVQ">
         <bpmn2:dataInput id="_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_userObjectInputX" drools:dtype="com.bravo.management.User" itemSubjectRef="__C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_userObjectInputXItem" name="userObject"/>
         <bpmn2:dataInput id="_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_callerMethodInputX" drools:dtype="String" itemSubjectRef="__C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_callerMethodInputXItem" name="callerMethod"/>
         <bpmn2:dataOutput id="_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_queryResponseOutputX" drools:dtype="java.util.List" itemSubjectRef="__C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_queryResponseOutputXItem" name="queryResponse"/>
-        <bpmn2:inputSet id="_SHFl0uMNEea4-PBTWsGeVQ">
+        <bpmn2:inputSet id="_lzqPYuMTEea4-PBTWsGeVQ">
           <bpmn2:dataInputRefs>_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_userObjectInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_callerMethodInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet id="_SHFl0-MNEea4-PBTWsGeVQ">
+        <bpmn2:outputSet id="_lzqPY-MTEea4-PBTWsGeVQ">
           <bpmn2:dataOutputRefs>_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_queryResponseOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_SHFl1OMNEea4-PBTWsGeVQ">
+      <bpmn2:dataInputAssociation id="_lzqPZOMTEea4-PBTWsGeVQ">
         <bpmn2:sourceRef>userQuery</bpmn2:sourceRef>
         <bpmn2:targetRef>_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_userObjectInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="_SHFl1eMNEea4-PBTWsGeVQ">
+      <bpmn2:dataInputAssociation id="_lzqPZeMTEea4-PBTWsGeVQ">
         <bpmn2:sourceRef>callerMethod</bpmn2:sourceRef>
         <bpmn2:targetRef>_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_callerMethodInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation id="_SHFl1uMNEea4-PBTWsGeVQ">
+      <bpmn2:dataOutputAssociation id="_lzqPZuMTEea4-PBTWsGeVQ">
         <bpmn2:sourceRef>_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1_queryResponseOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>workersResponse</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
@@ -90,49 +91,69 @@ kcontext.setVariable("isMaintenanceAgentExists",maintenanceWorkersList.size());
       </bpmn2:extensionElements>
       <bpmn2:incoming>_DBB2A836-94EA-47EC-BEB7-7506EEAF6D13</bpmn2:incoming>
     </bpmn2:task>
-    <bpmn2:sequenceFlow id="_DBB2A836-94EA-47EC-BEB7-7506EEAF6D13" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_280C2CD6-68F2-4680-950E-20A2D898EF37" targetRef="_3198FA94-1733-4350-82E6-FFDD18C63683"/>
+    <bpmn2:sequenceFlow id="_DBB2A836-94EA-47EC-BEB7-7506EEAF6D13" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_280C2CD6-68F2-4680-950E-20A2D898EF37" targetRef="_3198FA94-1733-4350-82E6-FFDD18C63683">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_lzqPZ-MTEea4-PBTWsGeVQ" language="http://www.java.com/java"><![CDATA[return  KieFunctions.isFalse(isMaintenanceAgentExists);]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:task id="_624F9E4F-B594-48FB-A96C-A22500409A51" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_9E1461B4-E91E-4C4B-B766-920A52A3E693</bpmn2:incoming>
+    </bpmn2:task>
+    <bpmn2:sequenceFlow id="_9E1461B4-E91E-4C4B-B766-920A52A3E693" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_280C2CD6-68F2-4680-950E-20A2D898EF37" targetRef="_624F9E4F-B594-48FB-A96C-A22500409A51">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_lzqPaOMTEea4-PBTWsGeVQ" language="http://www.java.com/java"><![CDATA[return  KieFunctions.isTrue(isMaintenanceAgentExists);]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
   </bpmn2:process>
-  <bpmndi:BPMNDiagram id="_SHFl1-MNEea4-PBTWsGeVQ">
-    <bpmndi:BPMNPlane id="_SHFl2OMNEea4-PBTWsGeVQ" bpmnElement="HotelManagement.onCall">
-      <bpmndi:BPMNShape id="_SHFl2eMNEea4-PBTWsGeVQ" bpmnElement="processStartEvent">
+  <bpmndi:BPMNDiagram id="_lzqPaeMTEea4-PBTWsGeVQ">
+    <bpmndi:BPMNPlane id="_lzqPauMTEea4-PBTWsGeVQ" bpmnElement="HotelManagement.onCall">
+      <bpmndi:BPMNShape id="_lzqPa-MTEea4-PBTWsGeVQ" bpmnElement="processStartEvent">
         <dc:Bounds height="30.0" width="30.0" x="15.0" y="165.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_SHFl2uMNEea4-PBTWsGeVQ" bpmnElement="_8F49DF2F-E45E-49F0-9E3D-B78F17D76CAE">
+      <bpmndi:BPMNShape id="_lzqPbOMTEea4-PBTWsGeVQ" bpmnElement="_8F49DF2F-E45E-49F0-9E3D-B78F17D76CAE">
         <dc:Bounds height="80.0" width="100.0" x="90.0" y="145.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_SHFl2-MNEea4-PBTWsGeVQ" bpmnElement="_280C2CD6-68F2-4680-950E-20A2D898EF37">
+      <bpmndi:BPMNShape id="_lzqPbeMTEea4-PBTWsGeVQ" bpmnElement="_280C2CD6-68F2-4680-950E-20A2D898EF37">
         <dc:Bounds height="40.0" width="40.0" x="375.0" y="165.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_SHFl3OMNEea4-PBTWsGeVQ" bpmnElement="_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1">
+      <bpmndi:BPMNShape id="_lzqPbuMTEea4-PBTWsGeVQ" bpmnElement="_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1">
         <dc:Bounds height="80.0" width="100.0" x="210.0" y="145.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_SHFl3eMNEea4-PBTWsGeVQ" bpmnElement="_3198FA94-1733-4350-82E6-FFDD18C63683">
+      <bpmndi:BPMNShape id="_lzqPb-MTEea4-PBTWsGeVQ" bpmnElement="_3198FA94-1733-4350-82E6-FFDD18C63683">
         <dc:Bounds height="80.0" width="100.0" x="345.0" y="330.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="_SHFl3uMNEea4-PBTWsGeVQ" bpmnElement="_916164D4-C6DF-4703-9A9C-03BC4F50493F" sourceElement="_SHFl2eMNEea4-PBTWsGeVQ" targetElement="_SHFl2uMNEea4-PBTWsGeVQ">
+      <bpmndi:BPMNShape id="_lzqPcOMTEea4-PBTWsGeVQ" bpmnElement="_624F9E4F-B594-48FB-A96C-A22500409A51">
+        <dc:Bounds height="80.0" width="100.0" x="460.0" y="145.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_lzqPceMTEea4-PBTWsGeVQ" bpmnElement="_916164D4-C6DF-4703-9A9C-03BC4F50493F" sourceElement="_lzqPa-MTEea4-PBTWsGeVQ" targetElement="_lzqPbOMTEea4-PBTWsGeVQ">
         <di:waypoint xsi:type="dc:Point" x="30.0" y="180.0"/>
         <di:waypoint xsi:type="dc:Point" x="140.0" y="185.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_SHFl3-MNEea4-PBTWsGeVQ" bpmnElement="_E53EA28B-378F-439E-9971-D4EB31A7C4AE" sourceElement="_SHFl2uMNEea4-PBTWsGeVQ" targetElement="_SHFl3OMNEea4-PBTWsGeVQ">
+      <bpmndi:BPMNEdge id="_lzqPcuMTEea4-PBTWsGeVQ" bpmnElement="_E53EA28B-378F-439E-9971-D4EB31A7C4AE" sourceElement="_lzqPbOMTEea4-PBTWsGeVQ" targetElement="_lzqPbuMTEea4-PBTWsGeVQ">
         <di:waypoint xsi:type="dc:Point" x="140.0" y="185.0"/>
         <di:waypoint xsi:type="dc:Point" x="260.0" y="185.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_SHFl4OMNEea4-PBTWsGeVQ" bpmnElement="_F9DEAFC9-8194-4854-B73C-C8F82862E67D" sourceElement="_SHFl3OMNEea4-PBTWsGeVQ" targetElement="_SHFl2-MNEea4-PBTWsGeVQ">
+      <bpmndi:BPMNEdge id="_lzqPc-MTEea4-PBTWsGeVQ" bpmnElement="_F9DEAFC9-8194-4854-B73C-C8F82862E67D" sourceElement="_lzqPbuMTEea4-PBTWsGeVQ" targetElement="_lzqPbeMTEea4-PBTWsGeVQ">
         <di:waypoint xsi:type="dc:Point" x="260.0" y="185.0"/>
         <di:waypoint xsi:type="dc:Point" x="395.0" y="185.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_SHFl4eMNEea4-PBTWsGeVQ" bpmnElement="_DBB2A836-94EA-47EC-BEB7-7506EEAF6D13" sourceElement="_SHFl2-MNEea4-PBTWsGeVQ" targetElement="_SHFl3eMNEea4-PBTWsGeVQ">
+      <bpmndi:BPMNEdge id="_lzqPdOMTEea4-PBTWsGeVQ" bpmnElement="_DBB2A836-94EA-47EC-BEB7-7506EEAF6D13" sourceElement="_lzqPbeMTEea4-PBTWsGeVQ" targetElement="_lzqPb-MTEea4-PBTWsGeVQ">
         <di:waypoint xsi:type="dc:Point" x="395.0" y="185.0"/>
         <di:waypoint xsi:type="dc:Point" x="395.0" y="370.0"/>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_lzqPdeMTEea4-PBTWsGeVQ" bpmnElement="_9E1461B4-E91E-4C4B-B766-920A52A3E693" sourceElement="_lzqPbeMTEea4-PBTWsGeVQ" targetElement="_lzqPcOMTEea4-PBTWsGeVQ">
+        <di:waypoint xsi:type="dc:Point" x="395.0" y="185.0"/>
+        <di:waypoint xsi:type="dc:Point" x="510.0" y="185.0"/>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_SHFl4uMNEea4-PBTWsGeVQ" type="BPSimData">
+  <bpmn2:relationship id="_lzqPduMTEea4-PBTWsGeVQ" type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
           <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="min"/>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_3198FA94-1733-4350-82E6-FFDD18C63683" id="_SHFl4-MNEea4-PBTWsGeVQ">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_3198FA94-1733-4350-82E6-FFDD18C63683" id="_lzqPd-MTEea4-PBTWsGeVQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -144,7 +165,7 @@ kcontext.setVariable("isMaintenanceAgentExists",maintenanceWorkersList.size());
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1" id="_SHFl5OMNEea4-PBTWsGeVQ">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_624F9E4F-B594-48FB-A96C-A22500409A51" id="_lzqPeOMTEea4-PBTWsGeVQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -156,28 +177,7 @@ kcontext.setVariable("isMaintenanceAgentExists",maintenanceWorkersList.size());
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_916164D4-C6DF-4703-9A9C-03BC4F50493F" id="_SHFl5eMNEea4-PBTWsGeVQ">
-            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
-              <bpsim:Probability xsi:type="bpsim:Parameter">
-                <bpsim:FloatingParameter value="100.0"/>
-              </bpsim:Probability>
-            </bpsim:ControlParameters>
-          </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_E53EA28B-378F-439E-9971-D4EB31A7C4AE" id="_SHFl5uMNEea4-PBTWsGeVQ">
-            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
-              <bpsim:Probability xsi:type="bpsim:Parameter">
-                <bpsim:FloatingParameter value="100.0"/>
-              </bpsim:Probability>
-            </bpsim:ControlParameters>
-          </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F9DEAFC9-8194-4854-B73C-C8F82862E67D" id="_SHFl5-MNEea4-PBTWsGeVQ">
-            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
-              <bpsim:Probability xsi:type="bpsim:Parameter">
-                <bpsim:FloatingParameter value="100.0"/>
-              </bpsim:Probability>
-            </bpsim:ControlParameters>
-          </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_8F49DF2F-E45E-49F0-9E3D-B78F17D76CAE" id="_SHFl6OMNEea4-PBTWsGeVQ">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_C57292A1-8F32-4D70-9FB6-1B82D9F9C2D1" id="_lzqPeeMTEea4-PBTWsGeVQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -189,19 +189,59 @@ kcontext.setVariable("isMaintenanceAgentExists",maintenanceWorkersList.size());
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_DBB2A836-94EA-47EC-BEB7-7506EEAF6D13" id="_SHFl6eMNEea4-PBTWsGeVQ">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_916164D4-C6DF-4703-9A9C-03BC4F50493F" id="_lzqPeuMTEea4-PBTWsGeVQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_SHFl6uMNEea4-PBTWsGeVQ">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_E53EA28B-378F-439E-9971-D4EB31A7C4AE" id="_lzqPe-MTEea4-PBTWsGeVQ">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F9DEAFC9-8194-4854-B73C-C8F82862E67D" id="_lzqPfOMTEea4-PBTWsGeVQ">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_8F49DF2F-E45E-49F0-9E3D-B78F17D76CAE" id="_lzq2cOMTEea4-PBTWsGeVQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_DBB2A836-94EA-47EC-BEB7-7506EEAF6D13" id="_lzq2ceMTEea4-PBTWsGeVQ">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_lzq2cuMTEea4-PBTWsGeVQ">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_9E1461B4-E91E-4C4B-B766-920A52A3E693" id="_lzq2c-MTEea4-PBTWsGeVQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
@@ -211,7 +251,7 @@ kcontext.setVariable("isMaintenanceAgentExists",maintenanceWorkersList.size());
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_SHFl0OMNEea4-PBTWsGeVQ</bpmn2:source>
-    <bpmn2:target>_SHFl0OMNEea4-PBTWsGeVQ</bpmn2:target>
+    <bpmn2:source>_lzqPYOMTEea4-PBTWsGeVQ</bpmn2:source>
+    <bpmn2:target>_lzqPYOMTEea4-PBTWsGeVQ</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
