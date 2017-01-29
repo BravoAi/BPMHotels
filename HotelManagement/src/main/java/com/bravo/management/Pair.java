@@ -47,11 +47,7 @@ public class Pair implements java.io.Serializable
 	public String toString() {
 		return "Pair [role=" + role + ", interfaceName=" + interfaceName + "]";
 	}
-	public Pair(String role, String interfaceName) {
-		super();
-		this.role = role;
-		this.interfaceName = interfaceName;
-	}
+
 
 	
 
