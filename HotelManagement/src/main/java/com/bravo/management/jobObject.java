@@ -277,20 +277,25 @@ public class jobObject implements java.io.Serializable
 
    public String toString()
    {
-      String str = "id:" + id;
-      str += "  type:" + type;
-      str += "  isUrgent?:" + isUrgent;
-      str += "  standardTime:" + standardTime;
-      str += "  location:" + location;
-      str += "  contactPersonName:" + contactPersonName;
-      str += "  isContactIsGuest:" + isContactIsGuest;
-      str += "  title:" + title;
-      str += "  description:" + description;
-      str += "  division:" + division;
-      str += "  location:" + location;
-      str += "  status:" + status;
-      str += "  isLate?" + isLate;
+      String str = "id:" + getString(id);
+      str += "  type:" + getString(type);
+      str += "  isUrgent:" + getString(isUrgent);
+      str += "  standardTime:" + getString(standardTime);
+      str += "  location:" + getString(location);
+      str += "  contactPersonName:" + getString(contactPersonName);
+      str += "  isContactIsGuest:" + getString(isContactIsGuest);
+      str += "  title:" + getString(title);
+      str += "  description:" + getString(description);
+      str += "  division:" + getString(division);
+      str += "  location:" + getString(location);
+      str += "  status:" + getString(status);
+      str += "  isLate:" + getString(isLate);
       return str;
+   }
+
+    private String getString(java.lang.Object o){
+       return o == null? "null" : o.toString();
+       
    }
 
    public java.lang.Boolean getIsLate()
