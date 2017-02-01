@@ -287,15 +287,25 @@ public class jobObject implements java.io.Serializable
       str += "  title:" + getString(title);
       str += "  description:" + getString(description);
       str += "  division:" + getString(division);
-      str += "  location:" + getString(location);
       str += "  status:" + getString(status);
       str += "  isLate:" + getString(isLate);
       return str;
    }
-
-    private String getString(java.lang.Object o){
+   
+   private static String getString(java.lang.Object o){
        return o == null? "null" : o.toString();
-       
+   }
+
+   private static String getString(java.lang.String s){
+
+
+       if(s == null){
+           return "null";
+       }
+       if(s.length() == 0){
+           return "empty";
+       }
+       return s.toString();
    }
 
    public java.lang.Boolean getIsLate()
