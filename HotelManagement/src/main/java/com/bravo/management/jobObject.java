@@ -275,7 +275,7 @@ public class jobObject implements java.io.Serializable
       this.division = division;
    }
 
-   public String toString()
+   /*public String toString()
    {
       String str = "id:" + getString(id);
       str += "  type:" + getString(type);
@@ -290,7 +290,17 @@ public class jobObject implements java.io.Serializable
       str += "  status:" + getString(status);
       str += "  isLate:" + getString(isLate);
       return str;
-   }
+   }*/
+   	public String toString() {
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			String str = mapper.writeValueAsString(this);
+			return str;
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
    
    private static String getString(java.lang.Object o){
        return o == null? "null" : o.toString();
