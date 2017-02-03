@@ -275,7 +275,7 @@ public class jobObject implements java.io.Serializable
       this.division = division;
    }
 
-   *public String toString()
+   public String toString()
    {
       String str = "id:" + getString(id);
       str += "  type:" + getString(type);
