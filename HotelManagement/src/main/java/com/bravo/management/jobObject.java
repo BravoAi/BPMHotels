@@ -275,7 +275,7 @@ public class jobObject implements java.io.Serializable
       this.division = division;
    }
 
-   public String toString()
+   /*public String toString()
    {
       String str = "id:" + getString(id);
       str += "  type:" + getString(type);
@@ -291,17 +291,17 @@ public class jobObject implements java.io.Serializable
       str += "  isLate:" + getString(isLate);
       str += "  isResultInRoomClosed:" + getString(isResultInRoomClosed);
       return str;
-   }
-   /*	public String toString() {
+   }*/
+   	public String toString() {
 		try {
-			Gson gson = new Gson();
+			com.google.gson.Gson gson = new com.google.gson.Gson();
 			String json = gson.toJson(this);
 			return json;
 		} catch (Exception e) {
 			return e.getMessage();
 		}
 
-	}*/
+	}
 
    
    private static String getString(java.lang.Object o){
