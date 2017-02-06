@@ -34,19 +34,11 @@ public class jobObject implements java.io.Serializable
 
    private java.lang.String location;
 
-   private java.lang.String contactPersonName;
-
    private java.lang.Boolean isContactIsGuest;
 
-   @javax.persistence.ManyToOne(cascade = { javax.persistence.CascadeType.ALL }, fetch = javax.persistence.FetchType.EAGER)
-   private com.bravo.management.jobCategoryObject category;
-
-   @javax.persistence.ManyToOne(cascade = { javax.persistence.CascadeType.ALL }, fetch = javax.persistence.FetchType.EAGER)
-   private com.bravo.management.jobCategoryObject subCategory;
+   private String category;
 
    private java.lang.String categoryIconUrl;
-
-   private java.lang.String title;
 
    private java.lang.String description;
 
@@ -59,6 +51,20 @@ public class jobObject implements java.io.Serializable
    private java.lang.String division;
 
    private java.lang.Boolean isLate;
+
+   private java.lang.String guestName;
+
+   private java.lang.String reporterName;
+
+   private java.lang.Boolean isRoom;
+
+   private java.lang.Integer floorNumber;
+
+   private java.lang.Integer roomNumber;
+
+   private java.lang.String incidentName;
+
+   private java.lang.String subcategory;
 
    public jobObject()
    {
@@ -164,16 +170,6 @@ public class jobObject implements java.io.Serializable
       this.location = location;
    }
 
-   public java.lang.String getContactPersonName()
-   {
-      return this.contactPersonName;
-   }
-
-   public void setContactPersonName(java.lang.String contactPersonName)
-   {
-      this.contactPersonName = contactPersonName;
-   }
-
    public java.lang.Boolean getIsContactIsGuest()
    {
       return this.isContactIsGuest;
@@ -184,27 +180,6 @@ public class jobObject implements java.io.Serializable
       this.isContactIsGuest = isContactIsGuest;
    }
 
-   public com.bravo.management.jobCategoryObject getCategory()
-   {
-      return this.category;
-   }
-
-   public void setCategory(com.bravo.management.jobCategoryObject category)
-   {
-      this.category = category;
-   }
-
-   public com.bravo.management.jobCategoryObject getSubCategory()
-   {
-      return this.subCategory;
-   }
-
-   public void setSubCategory(
-         com.bravo.management.jobCategoryObject subCategory)
-   {
-      this.subCategory = subCategory;
-   }
-
    public java.lang.String getCategoryIconUrl()
    {
       return this.categoryIconUrl;
@@ -213,16 +188,6 @@ public class jobObject implements java.io.Serializable
    public void setCategoryIconUrl(java.lang.String categoryIconUrl)
    {
       this.categoryIconUrl = categoryIconUrl;
-   }
-
-   public java.lang.String getTitle()
-   {
-      return this.title;
-   }
-
-   public void setTitle(java.lang.String title)
-   {
-      this.title = title;
    }
 
    public java.lang.String getDescription()
@@ -292,32 +257,38 @@ public class jobObject implements java.io.Serializable
       str += "  isResultInRoomClosed:" + getString(isResultInRoomClosed);
       return str;
    }*/
-   	public String toString() {
-		try {
-			com.google.gson.Gson gson = new com.google.gson.Gson();
-			String json = gson.toJson(this);
-			return json;
-		} catch (Exception e) {
-			return e.getMessage();
-		}
+   public String toString()
+   {
+      try
+      {
+         com.google.gson.Gson gson = new com.google.gson.Gson();
+         String json = gson.toJson(this);
+         return json;
+      }
+      catch (Exception e)
+      {
+         return e.getMessage();
+      }
 
-	}
-
-   
-   private static String getString(java.lang.Object o){
-       return o == null? "null" : o.toString();
    }
 
-   private static String getString(java.lang.String s){
+   private static String getString(java.lang.Object o)
+   {
+      return o == null ? "null" : o.toString();
+   }
 
+   private static String getString(java.lang.String s)
+   {
 
-       if(s == null){
-           return "null";
-       }
-       if(s.length() == 0){
-           return "empty";
-       }
-       return s.toString();
+      if (s == null)
+      {
+         return "null";
+      }
+      if (s.length() == 0)
+      {
+         return "empty";
+      }
+      return s.toString();
    }
 
    public java.lang.Boolean getIsLate()
@@ -330,20 +301,99 @@ public class jobObject implements java.io.Serializable
       this.isLate = isLate;
    }
 
+   public java.lang.String getGuestName()
+   {
+      return this.guestName;
+   }
+
+   public void setGuestName(java.lang.String guestName)
+   {
+      this.guestName = guestName;
+   }
+
+   public java.lang.String getReporterName()
+   {
+      return this.reporterName;
+   }
+
+   public void setReporterName(java.lang.String reporterName)
+   {
+      this.reporterName = reporterName;
+   }
+
+   public java.lang.Boolean getIsRoom()
+   {
+      return this.isRoom;
+   }
+
+   public void setIsRoom(java.lang.Boolean isRoom)
+   {
+      this.isRoom = isRoom;
+   }
+
+   public java.lang.Integer getFloorNumber()
+   {
+      return this.floorNumber;
+   }
+
+   public void setFloorNumber(java.lang.Integer floorNumber)
+   {
+      this.floorNumber = floorNumber;
+   }
+
+   public java.lang.Integer getRoomNumber()
+   {
+      return this.roomNumber;
+   }
+
+   public void setRoomNumber(java.lang.Integer roomNumber)
+   {
+      this.roomNumber = roomNumber;
+   }
+
+   public java.lang.String getIncidentName()
+   {
+      return this.incidentName;
+   }
+
+   public void setIncidentName(java.lang.String incidentName)
+   {
+      this.incidentName = incidentName;
+   }
+
+   public java.lang.String getCategory()
+   {
+      return this.category;
+   }
+
+   public void setCategory(java.lang.String category)
+   {
+      this.category = category;
+   }
+
+   public java.lang.String getSubcategory()
+   {
+      return this.subcategory;
+   }
+
+   public void setSubcategory(java.lang.String subcategory)
+   {
+      this.subcategory = subcategory;
+   }
+
    public jobObject(java.lang.Long id, java.lang.String type,
          java.lang.String typeIconUrl, java.lang.Boolean isUrgent,
-         java.lang.Boolean urgentIconUrl,
-         com.bravo.management.User assignedTo,
-         java.lang.Boolean isResultInRoomClosed,
-         java.lang.Boolean isCritical, java.lang.Integer standardTime,
-         java.lang.String location, java.lang.String contactPersonName,
-         java.lang.Boolean isContactIsGuest,
-         com.bravo.management.jobCategoryObject category,
-         com.bravo.management.jobCategoryObject subCategory,
-         java.lang.String categoryIconUrl, java.lang.String title,
-         java.lang.String description, java.lang.String status,
-         java.math.BigInteger parentJobID, java.math.BigInteger childJobID,
-         java.lang.String division, java.lang.Boolean isLate)
+         java.lang.Boolean urgentIconUrl, com.bravo.management.User assignedTo,
+         java.lang.Boolean isResultInRoomClosed, java.lang.Boolean isCritical,
+         java.lang.Integer standardTime, java.lang.String location,
+         java.lang.Boolean isContactIsGuest, java.lang.String category,
+         java.lang.String categoryIconUrl, java.lang.String description,
+         java.lang.String status, java.math.BigInteger parentJobID,
+         java.math.BigInteger childJobID, java.lang.String division,
+         java.lang.Boolean isLate, java.lang.String guestName,
+         java.lang.String reporterName, java.lang.Boolean isRoom,
+         java.lang.Integer floorNumber, java.lang.Integer roomNumber,
+         java.lang.String incidentName, java.lang.String subcategory)
    {
       this.id = id;
       this.type = type;
@@ -355,17 +405,21 @@ public class jobObject implements java.io.Serializable
       this.isCritical = isCritical;
       this.standardTime = standardTime;
       this.location = location;
-      this.contactPersonName = contactPersonName;
       this.isContactIsGuest = isContactIsGuest;
       this.category = category;
-      this.subCategory = subCategory;
       this.categoryIconUrl = categoryIconUrl;
-      this.title = title;
       this.description = description;
       this.status = status;
       this.parentJobID = parentJobID;
       this.childJobID = childJobID;
       this.division = division;
       this.isLate = isLate;
+      this.guestName = guestName;
+      this.reporterName = reporterName;
+      this.isRoom = isRoom;
+      this.floorNumber = floorNumber;
+      this.roomNumber = roomNumber;
+      this.incidentName = incidentName;
+      this.subcategory = subcategory;
    }
 }
