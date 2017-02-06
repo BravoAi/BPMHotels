@@ -44,9 +44,9 @@ public class jobObject implements java.io.Serializable
 
    private java.lang.String status;
 
-   private java.math.BigInteger parentJobID;
+   private java.lang.Long parentJobID;
 
-   private java.math.BigInteger childJobID;
+   private java.lang.Long childJobID;
 
    private java.lang.String division;
 
@@ -210,22 +210,22 @@ public class jobObject implements java.io.Serializable
       this.status = status;
    }
 
-   public java.math.BigInteger getParentJobID()
+   public java.lang.Long getParentJobID()
    {
       return this.parentJobID;
    }
 
-   public void setParentJobID(java.math.BigInteger parentJobID)
+   public void setParentJobID(java.lang.Long parentJobID)
    {
       this.parentJobID = parentJobID;
    }
 
-   public java.math.BigInteger getChildJobID()
+   public java.lang.Long getChildJobID()
    {
       return this.childJobID;
    }
 
-   public void setChildJobID(java.math.BigInteger childJobID)
+   public void setChildJobID(java.lang.Long childJobID)
    {
       this.childJobID = childJobID;
    }
@@ -372,8 +372,8 @@ public class jobObject implements java.io.Serializable
          java.lang.Integer standardTime, java.lang.String location,
          java.lang.Boolean isContactIsGuest, java.lang.String category,
          java.lang.String categoryIconUrl, java.lang.String description,
-         java.lang.String status, java.math.BigInteger parentJobID,
-         java.math.BigInteger childJobID, java.lang.String division,
+         java.lang.String status, java.lang.Long parentJobID,
+         java.lang.Long childJobID, java.lang.String division,
          java.lang.Boolean isLate, java.lang.String guestName,
          java.lang.String reporterName, java.lang.Boolean isRoom,
          java.lang.Integer floorNumber, java.lang.Integer roomNumber,
