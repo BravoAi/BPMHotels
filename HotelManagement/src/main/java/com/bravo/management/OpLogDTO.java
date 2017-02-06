@@ -89,6 +89,21 @@ public class OpLogDTO implements java.io.Serializable
       this.action = action;
    }
 
+   public String toString()
+   {
+      try
+      {
+         com.google.gson.Gson gson = new com.google.gson.Gson();
+         String json = gson.toJson(this);
+         return json;
+      }
+      catch (Exception e)
+      {
+         return e.getMessage();
+      }
+
+   }
+
    public OpLogDTO(java.lang.Long id, java.lang.String module,
          java.lang.String message, java.lang.String initiator,
          java.lang.Boolean isCritical, java.lang.String action)
