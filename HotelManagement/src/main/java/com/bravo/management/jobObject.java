@@ -66,6 +66,8 @@ public class jobObject implements java.io.Serializable
 
    private java.lang.String subcategory;
 
+   private java.lang.String picture;
+
    public jobObject()
    {
    }
@@ -240,7 +242,6 @@ public class jobObject implements java.io.Serializable
       this.division = division;
    }
 
-   
    public String toString()
    {
       try
@@ -365,6 +366,16 @@ public class jobObject implements java.io.Serializable
       this.subcategory = subcategory;
    }
 
+   public java.lang.String getPicture()
+   {
+      return this.picture;
+   }
+
+   public void setPicture(java.lang.String picture)
+   {
+      this.picture = picture;
+   }
+
    public jobObject(java.lang.Long id, java.lang.String type,
          java.lang.String typeIconUrl, java.lang.Boolean isUrgent,
          java.lang.Boolean urgentIconUrl, com.bravo.management.User assignedTo,
@@ -377,7 +388,8 @@ public class jobObject implements java.io.Serializable
          java.lang.Boolean isLate, java.lang.String guestName,
          java.lang.String reporterName, java.lang.Boolean isRoom,
          java.lang.Integer floorNumber, java.lang.Integer roomNumber,
-         java.lang.String incidentName, java.lang.String subcategory)
+         java.lang.String incidentName, java.lang.String subcategory,
+         java.lang.String picture)
    {
       this.id = id;
       this.type = type;
@@ -405,5 +417,6 @@ public class jobObject implements java.io.Serializable
       this.roomNumber = roomNumber;
       this.incidentName = incidentName;
       this.subcategory = subcategory;
+      this.picture = picture;
    }
 }
