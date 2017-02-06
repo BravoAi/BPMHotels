@@ -89,7 +89,7 @@ public class OpLogDTO implements java.io.Serializable
       this.action = action;
    }
 
-   public String toString()
+   public String toJson()
    {
       try
       {
