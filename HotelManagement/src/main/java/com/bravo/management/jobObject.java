@@ -64,7 +64,7 @@ public class jobObject implements java.io.Serializable
 
    private java.lang.String incidentName;
 
-   private java.lang.String subcategory;
+   private java.lang.String subCategory;
 
    private java.lang.String picture;
 
@@ -358,12 +358,12 @@ public class jobObject implements java.io.Serializable
 
    public java.lang.String getSubcategory()
    {
-      return this.subcategory;
+      return this.subCategory;
    }
 
-   public void setSubcategory(java.lang.String subcategory)
+   public void setSubcategory(java.lang.String subCategory)
    {
-      this.subcategory = subcategory;
+      this.subCategory = subCategory;
    }
 
    public java.lang.String getPicture()
@@ -388,7 +388,7 @@ public class jobObject implements java.io.Serializable
          java.lang.Boolean isLate, java.lang.String guestName,
          java.lang.String reporterName, java.lang.Boolean isRoom,
          java.lang.Integer floorNumber, java.lang.Integer roomNumber,
-         java.lang.String incidentName, java.lang.String subcategory,
+         java.lang.String incidentName, java.lang.String subCategory,
          java.lang.String picture)
    {
       this.id = id;
@@ -416,7 +416,7 @@ public class jobObject implements java.io.Serializable
       this.floorNumber = floorNumber;
       this.roomNumber = roomNumber;
       this.incidentName = incidentName;
-      this.subcategory = subcategory;
+      this.subCategory = subCategory;
       this.picture = picture;
    }
 }
