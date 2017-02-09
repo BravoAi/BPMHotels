@@ -25,7 +25,7 @@ public class OpLogDTO implements java.io.Serializable
 
    private java.lang.String action;
 
-   private java.lang.String date;
+   private java.lang.Long timestamp;
 
    public OpLogDTO()
    {
@@ -106,20 +106,20 @@ public class OpLogDTO implements java.io.Serializable
 
    }
 
-   public java.lang.String getDate()
+   public java.lang.Long getTimestamp()
    {
-      return this.date;
+      return this.timestamp;
    }
 
-   public void setDate(java.lang.String date)
+   public void setTimestamp(java.lang.Long timestamp)
    {
-      this.date = date;
+      this.timestamp = timestamp;
    }
 
    public OpLogDTO(java.lang.Long id, java.lang.String module,
          java.lang.String message, java.lang.String initiator,
          java.lang.Boolean isCritical, java.lang.String action,
-         java.lang.String date)
+         java.lang.Long timestamp)
    {
       this.id = id;
       this.module = module;
@@ -127,7 +127,7 @@ public class OpLogDTO implements java.io.Serializable
       this.initiator = initiator;
       this.isCritical = isCritical;
       this.action = action;
-      this.date = date;
+      this.timestamp = timestamp;
    }
 
 }
