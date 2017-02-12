@@ -26,8 +26,6 @@ public class jobObject implements java.io.Serializable
    @javax.persistence.ManyToOne(cascade = { javax.persistence.CascadeType.ALL }, fetch = javax.persistence.FetchType.EAGER)
    private com.bravo.management.User assignedTo;
 
-   private java.lang.Boolean isResultInRoomClosed;
-
    private java.lang.Boolean isCritical;
 
    private java.lang.Integer standardTime;
@@ -67,6 +65,8 @@ public class jobObject implements java.io.Serializable
    private java.lang.String subCategory;
 
    private java.lang.String picture;
+
+   private java.lang.Boolean isRoomOutOfOrder;
 
    public jobObject()
    {
@@ -130,16 +130,6 @@ public class jobObject implements java.io.Serializable
    public void setAssignedTo(com.bravo.management.User assignedTo)
    {
       this.assignedTo = assignedTo;
-   }
-
-   public java.lang.Boolean getIsResultInRoomClosed()
-   {
-      return this.isResultInRoomClosed;
-   }
-
-   public void setIsResultInRoomClosed(java.lang.Boolean isResultInRoomClosed)
-   {
-      this.isResultInRoomClosed = isResultInRoomClosed;
    }
 
    public java.lang.Boolean getIsCritical()
@@ -376,20 +366,30 @@ public class jobObject implements java.io.Serializable
       this.picture = picture;
    }
 
+   public java.lang.Boolean getIsRoomOutOfOrder()
+   {
+      return this.isRoomOutOfOrder;
+   }
+
+   public void setIsRoomOutOfOrder(java.lang.Boolean isRoomOutOfOrder)
+   {
+      this.isRoomOutOfOrder = isRoomOutOfOrder;
+   }
+
    public jobObject(java.lang.Long id, java.lang.String type,
          java.lang.String typeIconUrl, java.lang.Boolean isUrgent,
          java.lang.Boolean urgentIconUrl, com.bravo.management.User assignedTo,
-         java.lang.Boolean isResultInRoomClosed, java.lang.Boolean isCritical,
-         java.lang.Integer standardTime, java.lang.String location,
-         java.lang.Boolean isContactIsGuest, java.lang.String category,
-         java.lang.String categoryIconUrl, java.lang.String description,
-         java.lang.String status, java.lang.Long parentJobID,
-         java.lang.Long childJobID, java.lang.String division,
-         java.lang.Boolean isLate, java.lang.String guestName,
-         java.lang.String reporterName, java.lang.Boolean isRoom,
-         java.lang.Integer floorNumber, java.lang.Integer roomNumber,
-         java.lang.String incidentName, java.lang.String subCategory,
-         java.lang.String picture)
+         java.lang.Boolean isCritical, java.lang.Integer standardTime,
+         java.lang.String location, java.lang.Boolean isContactIsGuest,
+         java.lang.String category, java.lang.String categoryIconUrl,
+         java.lang.String description, java.lang.String status,
+         java.lang.Long parentJobID, java.lang.Long childJobID,
+         java.lang.String division, java.lang.Boolean isLate,
+         java.lang.String guestName, java.lang.String reporterName,
+         java.lang.Boolean isRoom, java.lang.Integer floorNumber,
+         java.lang.Integer roomNumber, java.lang.String incidentName,
+         java.lang.String subCategory, java.lang.String picture,
+         java.lang.Boolean isRoomOutOfOrder)
    {
       this.id = id;
       this.type = type;
@@ -397,7 +397,6 @@ public class jobObject implements java.io.Serializable
       this.isUrgent = isUrgent;
       this.urgentIconUrl = urgentIconUrl;
       this.assignedTo = assignedTo;
-      this.isResultInRoomClosed = isResultInRoomClosed;
       this.isCritical = isCritical;
       this.standardTime = standardTime;
       this.location = location;
@@ -418,5 +417,6 @@ public class jobObject implements java.io.Serializable
       this.incidentName = incidentName;
       this.subCategory = subCategory;
       this.picture = picture;
+      this.isRoomOutOfOrder = isRoomOutOfOrder;
    }
 }
