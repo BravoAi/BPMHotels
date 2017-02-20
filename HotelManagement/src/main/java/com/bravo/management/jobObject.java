@@ -23,8 +23,7 @@ public class jobObject implements java.io.Serializable
 
    private java.lang.Boolean urgentIconUrl;
 
-   @javax.persistence.ManyToOne(cascade = { javax.persistence.CascadeType.ALL }, fetch = javax.persistence.FetchType.EAGER)
-   private com.bravo.management.User assignedTo;
+   private String assignedTo;
 
    private java.lang.Boolean isCritical;
 
@@ -120,16 +119,6 @@ public class jobObject implements java.io.Serializable
    public void setUrgentIconUrl(java.lang.Boolean urgentIconUrl)
    {
       this.urgentIconUrl = urgentIconUrl;
-   }
-
-   public com.bravo.management.User getAssignedTo()
-   {
-      return this.assignedTo;
-   }
-
-   public void setAssignedTo(com.bravo.management.User assignedTo)
-   {
-      this.assignedTo = assignedTo;
    }
 
    public java.lang.Boolean getIsCritical()
@@ -376,9 +365,19 @@ public class jobObject implements java.io.Serializable
       this.isRoomOutOfOrder = isRoomOutOfOrder;
    }
 
+   public java.lang.String getAssignedTo()
+   {
+      return this.assignedTo;
+   }
+
+   public void setAssignedTo(java.lang.String assignedTo)
+   {
+      this.assignedTo = assignedTo;
+   }
+
    public jobObject(java.lang.Long id, java.lang.String type,
          java.lang.String typeIconUrl, java.lang.Boolean isUrgent,
-         java.lang.Boolean urgentIconUrl, com.bravo.management.User assignedTo,
+         java.lang.Boolean urgentIconUrl, java.lang.String assignedTo,
          java.lang.Boolean isCritical, java.lang.Integer standardTime,
          java.lang.String location, java.lang.Boolean isContactIsGuest,
          java.lang.String category, java.lang.String categoryIconUrl,
