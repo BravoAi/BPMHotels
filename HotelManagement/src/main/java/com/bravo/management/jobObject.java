@@ -10,7 +10,7 @@ public class jobObject implements java.io.Serializable
 
    static final long serialVersionUID = 1L;
 
-   @javax.persistence.GeneratedValue(generator = "JOBOBJECT_ID_GENERATOR", strategy = javax.persistence.GenerationType.AUTO)
+   @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.AUTO, generator = "JOBOBJECT_ID_GENERATOR")
    @javax.persistence.Id
    @javax.persistence.SequenceGenerator(name = "JOBOBJECT_ID_GENERATOR", sequenceName = "JOBOBJECT_ID_SEQ")
    private java.lang.Long id;
@@ -57,8 +57,6 @@ public class jobObject implements java.io.Serializable
 
    private java.lang.Integer roomNumber;
 
-   private java.lang.String incidentName;
-
    private java.lang.String subCategory;
 
    private java.lang.String picture;
@@ -66,6 +64,8 @@ public class jobObject implements java.io.Serializable
    private java.lang.Boolean isRoomOutOfOrder;
 
    private java.lang.Long dueAt;
+
+   private java.lang.String incidentID;
 
    public jobObject()
    {
@@ -305,16 +305,6 @@ public class jobObject implements java.io.Serializable
       this.roomNumber = roomNumber;
    }
 
-   public java.lang.String getIncidentName()
-   {
-      return this.incidentName;
-   }
-
-   public void setIncidentName(java.lang.String incidentName)
-   {
-      this.incidentName = incidentName;
-   }
-
    public java.lang.String getCategory()
    {
       return this.category;
@@ -375,6 +365,16 @@ public class jobObject implements java.io.Serializable
       this.dueAt = dueAt;
    }
 
+   public java.lang.String getIncidentID()
+   {
+      return this.incidentID;
+   }
+
+   public void setIncidentID(java.lang.String incidentID)
+   {
+      this.incidentID = incidentID;
+   }
+
    public jobObject(java.lang.Long id, java.lang.String type,
          java.lang.String typeIconUrl, java.lang.Boolean isUrgent,
          java.lang.Boolean urgentIconUrl, java.lang.String assignedTo,
@@ -386,9 +386,9 @@ public class jobObject implements java.io.Serializable
          java.lang.Boolean isLate, java.lang.String guestName,
          java.lang.String reporterName, java.lang.Boolean isRoom,
          java.lang.Integer floorNumber, java.lang.Integer roomNumber,
-         java.lang.String incidentName, java.lang.String subCategory,
-         java.lang.String picture, java.lang.Boolean isRoomOutOfOrder,
-         java.lang.Long dueAt)
+         java.lang.String subCategory, java.lang.String picture,
+         java.lang.Boolean isRoomOutOfOrder, java.lang.Long dueAt,
+         java.lang.String incidentID)
    {
       this.id = id;
       this.type = type;
@@ -412,10 +412,10 @@ public class jobObject implements java.io.Serializable
       this.isRoom = isRoom;
       this.floorNumber = floorNumber;
       this.roomNumber = roomNumber;
-      this.incidentName = incidentName;
       this.subCategory = subCategory;
       this.picture = picture;
       this.isRoomOutOfOrder = isRoomOutOfOrder;
       this.dueAt = dueAt;
+      this.incidentID = incidentID;
    }
 }
