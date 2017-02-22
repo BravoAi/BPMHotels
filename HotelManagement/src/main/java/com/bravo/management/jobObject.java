@@ -10,9 +10,9 @@ public class jobObject implements java.io.Serializable
 
    static final long serialVersionUID = 1L;
 
-   @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.AUTO, generator = "JOBOBJECT_ID_GENERATOR")
+   @javax.persistence.GeneratedValue(generator = "JOBOBJECT_ID_GENERATOR", strategy = javax.persistence.GenerationType.AUTO)
    @javax.persistence.Id
-   @javax.persistence.SequenceGenerator(sequenceName = "JOBOBJECT_ID_SEQ", name = "JOBOBJECT_ID_GENERATOR")
+   @javax.persistence.SequenceGenerator(name = "JOBOBJECT_ID_GENERATOR", sequenceName = "JOBOBJECT_ID_SEQ")
    private java.lang.Long id;
 
    private java.lang.String type;
@@ -26,8 +26,6 @@ public class jobObject implements java.io.Serializable
    private String assignedTo;
 
    private java.lang.Boolean isCritical;
-
-   private java.lang.Integer standardTime;
 
    private java.lang.String location;
 
@@ -66,6 +64,8 @@ public class jobObject implements java.io.Serializable
    private java.lang.String picture;
 
    private java.lang.Boolean isRoomOutOfOrder;
+
+   private java.lang.Long dueAt;
 
    public jobObject()
    {
@@ -129,16 +129,6 @@ public class jobObject implements java.io.Serializable
    public void setIsCritical(java.lang.Boolean isCritical)
    {
       this.isCritical = isCritical;
-   }
-
-   public java.lang.Integer getStandardTime()
-   {
-      return this.standardTime;
-   }
-
-   public void setStandardTime(java.lang.Integer standardTime)
-   {
-      this.standardTime = standardTime;
    }
 
    public java.lang.String getLocation()
@@ -375,20 +365,30 @@ public class jobObject implements java.io.Serializable
       this.assignedTo = assignedTo;
    }
 
+   public java.lang.Long getDueAt()
+   {
+      return this.dueAt;
+   }
+
+   public void setDueAt(java.lang.Long dueAt)
+   {
+      this.dueAt = dueAt;
+   }
+
    public jobObject(java.lang.Long id, java.lang.String type,
          java.lang.String typeIconUrl, java.lang.Boolean isUrgent,
          java.lang.Boolean urgentIconUrl, java.lang.String assignedTo,
-         java.lang.Boolean isCritical, java.lang.Integer standardTime,
-         java.lang.String location, java.lang.Boolean isContactIsGuest,
-         java.lang.String category, java.lang.String categoryIconUrl,
-         java.lang.String description, java.lang.String status,
-         java.lang.Long parentJobID, java.lang.Long childJobID,
-         java.lang.String division, java.lang.Boolean isLate,
-         java.lang.String guestName, java.lang.String reporterName,
-         java.lang.Boolean isRoom, java.lang.Integer floorNumber,
-         java.lang.Integer roomNumber, java.lang.String incidentName,
-         java.lang.String subCategory, java.lang.String picture,
-         java.lang.Boolean isRoomOutOfOrder)
+         java.lang.Boolean isCritical, java.lang.String location,
+         java.lang.Boolean isContactIsGuest, java.lang.String category,
+         java.lang.String categoryIconUrl, java.lang.String description,
+         java.lang.String status, java.lang.Long parentJobID,
+         java.lang.Long childJobID, java.lang.String division,
+         java.lang.Boolean isLate, java.lang.String guestName,
+         java.lang.String reporterName, java.lang.Boolean isRoom,
+         java.lang.Integer floorNumber, java.lang.Integer roomNumber,
+         java.lang.String incidentName, java.lang.String subCategory,
+         java.lang.String picture, java.lang.Boolean isRoomOutOfOrder,
+         java.lang.Long dueAt)
    {
       this.id = id;
       this.type = type;
@@ -397,7 +397,6 @@ public class jobObject implements java.io.Serializable
       this.urgentIconUrl = urgentIconUrl;
       this.assignedTo = assignedTo;
       this.isCritical = isCritical;
-      this.standardTime = standardTime;
       this.location = location;
       this.isContactIsGuest = isContactIsGuest;
       this.category = category;
@@ -417,5 +416,6 @@ public class jobObject implements java.io.Serializable
       this.subCategory = subCategory;
       this.picture = picture;
       this.isRoomOutOfOrder = isRoomOutOfOrder;
+      this.dueAt = dueAt;
    }
 }
