@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_8Yf4YPv4Eea2J5Jc1DBiIQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_B7VO0Pv5Eea2J5Jc1DBiIQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
   <bpmn2:itemDefinition id="_incidentNameItem" structureRef="String"/>
   <bpmn2:itemDefinition id="_standardTimeItem" structureRef="Integer"/>
   <bpmn2:process id="HotelManagement.getStandardTime" drools:packageName="org.jbpm" drools:version="1.0" name="getStandardTime" isExecutable="true">
@@ -11,6 +11,7 @@
           <drools:metaValue><![CDATA[]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
+      <bpmn2:documentation id="_B7VO0fv5Eea2J5Jc1DBiIQ"><![CDATA[kcontext.setVariable("standardTime","15"); //default without properties file\n\njava.util.List<java.util.Map.Entry> timersList=(java.util.List<java.util.Map.Entry>)com.util.PropertiesUtils.getPropertiesList("mamilaTimers.properties");\n\n\nif(timersList!=null){\n    for (java.util.Map.Entry entry:timersList){\n      \n     //System.out.println("key:"+entry.getKey()+"  Value: "+entry.getValue());\n      if (KieFunctions.equalsTo("oncallDefault",(String)entry.getKey())) {\n        System.out.println(">>> found key: "+entry.getKey()+"value:"+entry.getValue());\n        kcontext.setVariable("standardTime",entry.getValue());\n      }\n    }\n}\n\n\n\njava.util.List<java.util.Map.Entry> propertiesList=(java.util.List<java.util.Map.Entry>)com.util.PropertiesUtils.getPropertiesList("standardTimes.properties");\n\nString keyToLook=(String)kcontext.getVariable("incidentName");\n \n System.out.println("+++++++++++++++++++++++++ + Properties");\nif(propertiesList!=null){\n    for (java.util.Map.Entry entry:propertiesList){\n      \n     System.out.println("key:"+entry.getKey()+"  Value: "+entry.getValue());\n      if (KieFunctions.equalsTo(keyToLook,(String)entry.getKey())) {\n        System.out.println(">>> found key: "+entry.getKey());\n        kcontext.setVariable("standardTime",entry.getValue());\n      }\n    }\n\n}\n\n System.out.println("+++++++++++++++++++++++++ + Properties end");\n  System.out.println("+++++++++++++++++++++++++ + standard time: "+kcontext.getVariable("standardTime"));\n]]></bpmn2:documentation>
       <bpmn2:outgoing>_AF122800-7367-4746-B956-07B9E39FD1CC</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:scriptTask id="_43A4E549-5BBC-4719-9AEF-7D1F3FBF048B" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="" scriptFormat="http://www.java.com/java">
@@ -19,6 +20,7 @@
           <drools:metaValue><![CDATA[]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
+      <bpmn2:documentation id="_B7VO0vv5Eea2J5Jc1DBiIQ"><![CDATA[kcontext.setVariable("standardTime","15"); //default without properties file\n\njava.util.List<java.util.Map.Entry> timersList=(java.util.List<java.util.Map.Entry>)com.util.PropertiesUtils.getPropertiesList("mamilaTimers.properties");\n\n\nif(timersList!=null){\n    for (java.util.Map.Entry entry:timersList){\n      \n     //System.out.println("key:"+entry.getKey()+"  Value: "+entry.getValue());\n      if (KieFunctions.equalsTo("oncallDefault",(String)entry.getKey())) {\n        System.out.println(">>> found key: "+entry.getKey()+"value:"+entry.getValue());\n        kcontext.setVariable("standardTime",entry.getValue());\n      }\n    }\n}\n\n\n\njava.util.List<java.util.Map.Entry> propertiesList=(java.util.List<java.util.Map.Entry>)com.util.PropertiesUtils.getPropertiesList("standardTimes.properties");\n\nString keyToLook=(String)kcontext.getVariable("incidentName");\n \n System.out.println("+++++++++++++++++++++++++ + Properties");\nif(propertiesList!=null){\n    for (java.util.Map.Entry entry:propertiesList){\n      \n     System.out.println("key:"+entry.getKey()+"  Value: "+entry.getValue());\n      if (KieFunctions.equalsTo(keyToLook,(String)entry.getKey())) {\n        System.out.println(">>> found key: "+entry.getKey());\n        kcontext.setVariable("standardTime",entry.getValue());\n      }\n    }\n\n}\n\n System.out.println("+++++++++++++++++++++++++ + Properties end");\n  System.out.println("+++++++++++++++++++++++++ + standard time: "+kcontext.getVariable("standardTime"));\n]]></bpmn2:documentation>
       <bpmn2:incoming>_AF122800-7367-4746-B956-07B9E39FD1CC</bpmn2:incoming>
       <bpmn2:outgoing>_1EB87D4E-E2AD-43EB-A88F-824E95E8BEA2</bpmn2:outgoing>
       <bpmn2:script><![CDATA[kcontext.setVariable("standardTime","15"); //default without properties file
@@ -60,44 +62,49 @@ if(propertiesList!=null){
   System.out.println("+++++++++++++++++++++++++ + standard time: "+kcontext.getVariable("standardTime"));
 ]]></bpmn2:script>
     </bpmn2:scriptTask>
-    <bpmn2:sequenceFlow id="_AF122800-7367-4746-B956-07B9E39FD1CC" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="_43A4E549-5BBC-4719-9AEF-7D1F3FBF048B"/>
+    <bpmn2:sequenceFlow id="_AF122800-7367-4746-B956-07B9E39FD1CC" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="_43A4E549-5BBC-4719-9AEF-7D1F3FBF048B">
+      <bpmn2:documentation id="_B7VO0_v5Eea2J5Jc1DBiIQ"><![CDATA[kcontext.setVariable("standardTime","15"); //default without properties file\n\njava.util.List<java.util.Map.Entry> timersList=(java.util.List<java.util.Map.Entry>)com.util.PropertiesUtils.getPropertiesList("mamilaTimers.properties");\n\n\nif(timersList!=null){\n    for (java.util.Map.Entry entry:timersList){\n      \n     //System.out.println("key:"+entry.getKey()+"  Value: "+entry.getValue());\n      if (KieFunctions.equalsTo("oncallDefault",(String)entry.getKey())) {\n        System.out.println(">>> found key: "+entry.getKey()+"value:"+entry.getValue());\n        kcontext.setVariable("standardTime",entry.getValue());\n      }\n    }\n}\n\n\n\njava.util.List<java.util.Map.Entry> propertiesList=(java.util.List<java.util.Map.Entry>)com.util.PropertiesUtils.getPropertiesList("standardTimes.properties");\n\nString keyToLook=(String)kcontext.getVariable("incidentName");\n \n System.out.println("+++++++++++++++++++++++++ + Properties");\nif(propertiesList!=null){\n    for (java.util.Map.Entry entry:propertiesList){\n      \n     System.out.println("key:"+entry.getKey()+"  Value: "+entry.getValue());\n      if (KieFunctions.equalsTo(keyToLook,(String)entry.getKey())) {\n        System.out.println(">>> found key: "+entry.getKey());\n        kcontext.setVariable("standardTime",entry.getValue());\n      }\n    }\n\n}\n\n System.out.println("+++++++++++++++++++++++++ + Properties end");\n  System.out.println("+++++++++++++++++++++++++ + standard time: "+kcontext.getVariable("standardTime"));\n]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
     <bpmn2:endEvent id="_67EB0C57-96E4-4B63-92C6-F0DDFF71AEF0" drools:selectable="true" color:background-color="#ff6347" color:border-color="#000000" color:color="#000000" name="">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue><![CDATA[]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
+      <bpmn2:documentation id="_B7VO1Pv5Eea2J5Jc1DBiIQ"><![CDATA[kcontext.setVariable("standardTime","15"); //default without properties file\n\njava.util.List<java.util.Map.Entry> timersList=(java.util.List<java.util.Map.Entry>)com.util.PropertiesUtils.getPropertiesList("mamilaTimers.properties");\n\n\nif(timersList!=null){\n    for (java.util.Map.Entry entry:timersList){\n      \n     //System.out.println("key:"+entry.getKey()+"  Value: "+entry.getValue());\n      if (KieFunctions.equalsTo("oncallDefault",(String)entry.getKey())) {\n        System.out.println(">>> found key: "+entry.getKey()+"value:"+entry.getValue());\n        kcontext.setVariable("standardTime",entry.getValue());\n      }\n    }\n}\n\n\n\njava.util.List<java.util.Map.Entry> propertiesList=(java.util.List<java.util.Map.Entry>)com.util.PropertiesUtils.getPropertiesList("standardTimes.properties");\n\nString keyToLook=(String)kcontext.getVariable("incidentName");\n \n System.out.println("+++++++++++++++++++++++++ + Properties");\nif(propertiesList!=null){\n    for (java.util.Map.Entry entry:propertiesList){\n      \n     System.out.println("key:"+entry.getKey()+"  Value: "+entry.getValue());\n      if (KieFunctions.equalsTo(keyToLook,(String)entry.getKey())) {\n        System.out.println(">>> found key: "+entry.getKey());\n        kcontext.setVariable("standardTime",entry.getValue());\n      }\n    }\n\n}\n\n System.out.println("+++++++++++++++++++++++++ + Properties end");\n  System.out.println("+++++++++++++++++++++++++ + standard time: "+kcontext.getVariable("standardTime"));\n]]></bpmn2:documentation>
       <bpmn2:incoming>_1EB87D4E-E2AD-43EB-A88F-824E95E8BEA2</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="_1EB87D4E-E2AD-43EB-A88F-824E95E8BEA2" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_43A4E549-5BBC-4719-9AEF-7D1F3FBF048B" targetRef="_67EB0C57-96E4-4B63-92C6-F0DDFF71AEF0"/>
+    <bpmn2:sequenceFlow id="_1EB87D4E-E2AD-43EB-A88F-824E95E8BEA2" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_43A4E549-5BBC-4719-9AEF-7D1F3FBF048B" targetRef="_67EB0C57-96E4-4B63-92C6-F0DDFF71AEF0">
+      <bpmn2:documentation id="_B7VO1fv5Eea2J5Jc1DBiIQ"><![CDATA[kcontext.setVariable("standardTime","15"); //default without properties file\n\njava.util.List<java.util.Map.Entry> timersList=(java.util.List<java.util.Map.Entry>)com.util.PropertiesUtils.getPropertiesList("mamilaTimers.properties");\n\n\nif(timersList!=null){\n    for (java.util.Map.Entry entry:timersList){\n      \n     //System.out.println("key:"+entry.getKey()+"  Value: "+entry.getValue());\n      if (KieFunctions.equalsTo("oncallDefault",(String)entry.getKey())) {\n        System.out.println(">>> found key: "+entry.getKey()+"value:"+entry.getValue());\n        kcontext.setVariable("standardTime",entry.getValue());\n      }\n    }\n}\n\n\n\njava.util.List<java.util.Map.Entry> propertiesList=(java.util.List<java.util.Map.Entry>)com.util.PropertiesUtils.getPropertiesList("standardTimes.properties");\n\nString keyToLook=(String)kcontext.getVariable("incidentName");\n \n System.out.println("+++++++++++++++++++++++++ + Properties");\nif(propertiesList!=null){\n    for (java.util.Map.Entry entry:propertiesList){\n      \n     System.out.println("key:"+entry.getKey()+"  Value: "+entry.getValue());\n      if (KieFunctions.equalsTo(keyToLook,(String)entry.getKey())) {\n        System.out.println(">>> found key: "+entry.getKey());\n        kcontext.setVariable("standardTime",entry.getValue());\n      }\n    }\n\n}\n\n System.out.println("+++++++++++++++++++++++++ + Properties end");\n  System.out.println("+++++++++++++++++++++++++ + standard time: "+kcontext.getVariable("standardTime"));\n]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
   </bpmn2:process>
-  <bpmndi:BPMNDiagram id="_8Yf4Yfv4Eea2J5Jc1DBiIQ">
-    <bpmndi:BPMNPlane id="_8Yf4Yvv4Eea2J5Jc1DBiIQ" bpmnElement="HotelManagement.getStandardTime">
-      <bpmndi:BPMNShape id="_8Yf4Y_v4Eea2J5Jc1DBiIQ" bpmnElement="processStartEvent">
+  <bpmndi:BPMNDiagram id="_B7VO1vv5Eea2J5Jc1DBiIQ">
+    <bpmndi:BPMNPlane id="_B7VO1_v5Eea2J5Jc1DBiIQ" bpmnElement="HotelManagement.getStandardTime">
+      <bpmndi:BPMNShape id="_B7VO2Pv5Eea2J5Jc1DBiIQ" bpmnElement="processStartEvent">
         <dc:Bounds height="30.0" width="30.0" x="120.0" y="165.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_8Yf4ZPv4Eea2J5Jc1DBiIQ" bpmnElement="_43A4E549-5BBC-4719-9AEF-7D1F3FBF048B">
+      <bpmndi:BPMNShape id="_B7VO2fv5Eea2J5Jc1DBiIQ" bpmnElement="_43A4E549-5BBC-4719-9AEF-7D1F3FBF048B">
         <dc:Bounds height="80.0" width="100.0" x="195.0" y="135.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_8Yf4Zfv4Eea2J5Jc1DBiIQ" bpmnElement="_67EB0C57-96E4-4B63-92C6-F0DDFF71AEF0">
+      <bpmndi:BPMNShape id="_B7VO2vv5Eea2J5Jc1DBiIQ" bpmnElement="_67EB0C57-96E4-4B63-92C6-F0DDFF71AEF0">
         <dc:Bounds height="28.0" width="28.0" x="340.0" y="166.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="_8Yf4Zvv4Eea2J5Jc1DBiIQ" bpmnElement="_AF122800-7367-4746-B956-07B9E39FD1CC" sourceElement="_8Yf4Y_v4Eea2J5Jc1DBiIQ" targetElement="_8Yf4ZPv4Eea2J5Jc1DBiIQ">
+      <bpmndi:BPMNEdge id="_B7VO2_v5Eea2J5Jc1DBiIQ" bpmnElement="_AF122800-7367-4746-B956-07B9E39FD1CC" sourceElement="_B7VO2Pv5Eea2J5Jc1DBiIQ" targetElement="_B7VO2fv5Eea2J5Jc1DBiIQ">
         <di:waypoint xsi:type="dc:Point" x="135.0" y="180.0"/>
         <di:waypoint xsi:type="dc:Point" x="245.0" y="175.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_8Yf4Z_v4Eea2J5Jc1DBiIQ" bpmnElement="_1EB87D4E-E2AD-43EB-A88F-824E95E8BEA2" sourceElement="_8Yf4ZPv4Eea2J5Jc1DBiIQ" targetElement="_8Yf4Zfv4Eea2J5Jc1DBiIQ">
+      <bpmndi:BPMNEdge id="_B7VO3Pv5Eea2J5Jc1DBiIQ" bpmnElement="_1EB87D4E-E2AD-43EB-A88F-824E95E8BEA2" sourceElement="_B7VO2fv5Eea2J5Jc1DBiIQ" targetElement="_B7VO2vv5Eea2J5Jc1DBiIQ">
         <di:waypoint xsi:type="dc:Point" x="245.0" y="175.0"/>
         <di:waypoint xsi:type="dc:Point" x="354.0" y="180.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_8Yf4aPv4Eea2J5Jc1DBiIQ" type="BPSimData">
+  <bpmn2:relationship id="_B7VO3fv5Eea2J5Jc1DBiIQ" type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
           <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="min"/>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_43A4E549-5BBC-4719-9AEF-7D1F3FBF048B" id="_8Yf4afv4Eea2J5Jc1DBiIQ">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_43A4E549-5BBC-4719-9AEF-7D1F3FBF048B" id="_B7VO3vv5Eea2J5Jc1DBiIQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -109,21 +116,21 @@ if(propertiesList!=null){
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_67EB0C57-96E4-4B63-92C6-F0DDFF71AEF0" id="_8Yf4avv4Eea2J5Jc1DBiIQ">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_67EB0C57-96E4-4B63-92C6-F0DDFF71AEF0" id="_B7VO3_v5Eea2J5Jc1DBiIQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_1EB87D4E-E2AD-43EB-A88F-824E95E8BEA2" id="_8Yf4a_v4Eea2J5Jc1DBiIQ">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_1EB87D4E-E2AD-43EB-A88F-824E95E8BEA2" id="_B7VO4Pv5Eea2J5Jc1DBiIQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_8Yf4bPv4Eea2J5Jc1DBiIQ">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_B7VO4fv5Eea2J5Jc1DBiIQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -135,7 +142,7 @@ if(propertiesList!=null){
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_AF122800-7367-4746-B956-07B9E39FD1CC" id="_8Yf4bfv4Eea2J5Jc1DBiIQ">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_AF122800-7367-4746-B956-07B9E39FD1CC" id="_B7VO4vv5Eea2J5Jc1DBiIQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
@@ -145,7 +152,7 @@ if(propertiesList!=null){
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_8Yf4YPv4Eea2J5Jc1DBiIQ</bpmn2:source>
-    <bpmn2:target>_8Yf4YPv4Eea2J5Jc1DBiIQ</bpmn2:target>
+    <bpmn2:source>_B7VO0Pv5Eea2J5Jc1DBiIQ</bpmn2:source>
+    <bpmn2:target>_B7VO0Pv5Eea2J5Jc1DBiIQ</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
