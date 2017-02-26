@@ -67,7 +67,7 @@ public class jobObject implements java.io.Serializable
 
    private java.lang.String incidentID;
 
-   private java.util.Date createdAt;
+   private Long createdAt;
 
    public jobObject()
    {
@@ -377,12 +377,12 @@ public class jobObject implements java.io.Serializable
       this.incidentID = incidentID;
    }
 
-   public java.util.Date getCreatedAt()
+   public java.lang.Long getCreatedAt()
    {
       return this.createdAt;
    }
 
-   public void setCreatedAt(java.util.Date createdAt)
+   public void setCreatedAt(java.lang.Long createdAt)
    {
       this.createdAt = createdAt;
    }
@@ -400,7 +400,7 @@ public class jobObject implements java.io.Serializable
          java.lang.Integer floorNumber, java.lang.Integer roomNumber,
          java.lang.String subCategory, java.lang.String picture,
          java.lang.Boolean isRoomOutOfOrder, java.lang.Long dueAt,
-         java.lang.String incidentID, java.util.Date createdAt)
+         java.lang.String incidentID, java.lang.Long createdAt)
    {
       this.id = id;
       this.type = type;
