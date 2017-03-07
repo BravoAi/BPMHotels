@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_4QN5YQMUEeergZFRa_0-sg" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_VX3IsQM7EeeA6JqBJ_TdrQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
   <bpmn2:process id="HotelManagement.getWorkLoad" drools:packageName="org.jbpm" drools:version="1.0" name="getWorkLoad" isExecutable="true">
     <bpmn2:startEvent id="processStartEvent" drools:selectable="true" color:background-color="#9acd32" color:border-color="#000000" color:color="#000000" name="">
       <bpmn2:extensionElements>
@@ -17,9 +17,6 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>_D30B9A34-D517-4A9F-8F27-25C848A00C2B</bpmn2:incoming>
       <bpmn2:outgoing>_F47E04B7-8517-4032-AF14-B1255DC9FA62</bpmn2:outgoing>
-      <bpmn2:script><![CDATA[RuntimeEngine runtimeEngine = getRuntimeEngine();
-TaskService taskService = runtimeEngine.getTaskService();
-List<TaskSummary> tasks = taskService.getTasksAssignedAsPotentialOwner("agent1", "en-UK");]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="_D30B9A34-D517-4A9F-8F27-25C848A00C2B" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="_0190CDE2-7E1E-4311-ADF9-D8A1D54F21EF"/>
     <bpmn2:endEvent id="_2C06A2C0-3B49-4D07-9A13-4916A5DBED83" drools:selectable="true" color:background-color="#ff6347" color:border-color="#000000" color:color="#000000" name="">
@@ -32,33 +29,33 @@ List<TaskSummary> tasks = taskService.getTasksAssignedAsPotentialOwner("agent1",
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="_F47E04B7-8517-4032-AF14-B1255DC9FA62" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_0190CDE2-7E1E-4311-ADF9-D8A1D54F21EF" targetRef="_2C06A2C0-3B49-4D07-9A13-4916A5DBED83"/>
   </bpmn2:process>
-  <bpmndi:BPMNDiagram id="_4QQ8sAMUEeergZFRa_0-sg">
-    <bpmndi:BPMNPlane id="_4QQ8sQMUEeergZFRa_0-sg" bpmnElement="HotelManagement.getWorkLoad">
-      <bpmndi:BPMNShape id="_4QQ8sgMUEeergZFRa_0-sg" bpmnElement="processStartEvent">
+  <bpmndi:BPMNDiagram id="_VX5k8AM7EeeA6JqBJ_TdrQ">
+    <bpmndi:BPMNPlane id="_VX5k8QM7EeeA6JqBJ_TdrQ" bpmnElement="HotelManagement.getWorkLoad">
+      <bpmndi:BPMNShape id="_VX5k8gM7EeeA6JqBJ_TdrQ" bpmnElement="processStartEvent">
         <dc:Bounds height="30.0" width="30.0" x="120.0" y="165.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_4QQ8swMUEeergZFRa_0-sg" bpmnElement="_0190CDE2-7E1E-4311-ADF9-D8A1D54F21EF">
+      <bpmndi:BPMNShape id="_VX5k8wM7EeeA6JqBJ_TdrQ" bpmnElement="_0190CDE2-7E1E-4311-ADF9-D8A1D54F21EF">
         <dc:Bounds height="80.0" width="100.0" x="195.0" y="140.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_4QQ8tAMUEeergZFRa_0-sg" bpmnElement="_2C06A2C0-3B49-4D07-9A13-4916A5DBED83">
+      <bpmndi:BPMNShape id="_VX5k9AM7EeeA6JqBJ_TdrQ" bpmnElement="_2C06A2C0-3B49-4D07-9A13-4916A5DBED83">
         <dc:Bounds height="28.0" width="28.0" x="340.0" y="166.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="_4QQ8tQMUEeergZFRa_0-sg" bpmnElement="_D30B9A34-D517-4A9F-8F27-25C848A00C2B" sourceElement="_4QQ8sgMUEeergZFRa_0-sg" targetElement="_4QQ8swMUEeergZFRa_0-sg">
+      <bpmndi:BPMNEdge id="_VX6MAAM7EeeA6JqBJ_TdrQ" bpmnElement="_D30B9A34-D517-4A9F-8F27-25C848A00C2B" sourceElement="_VX5k8gM7EeeA6JqBJ_TdrQ" targetElement="_VX5k8wM7EeeA6JqBJ_TdrQ">
         <di:waypoint xsi:type="dc:Point" x="135.0" y="180.0"/>
         <di:waypoint xsi:type="dc:Point" x="245.0" y="180.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_4QQ8tgMUEeergZFRa_0-sg" bpmnElement="_F47E04B7-8517-4032-AF14-B1255DC9FA62" sourceElement="_4QQ8swMUEeergZFRa_0-sg" targetElement="_4QQ8tAMUEeergZFRa_0-sg">
+      <bpmndi:BPMNEdge id="_VX6MAQM7EeeA6JqBJ_TdrQ" bpmnElement="_F47E04B7-8517-4032-AF14-B1255DC9FA62" sourceElement="_VX5k8wM7EeeA6JqBJ_TdrQ" targetElement="_VX5k9AM7EeeA6JqBJ_TdrQ">
         <di:waypoint xsi:type="dc:Point" x="245.0" y="180.0"/>
         <di:waypoint xsi:type="dc:Point" x="354.0" y="180.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_4QQ8twMUEeergZFRa_0-sg" type="BPSimData">
+  <bpmn2:relationship id="_VX6MAgM7EeeA6JqBJ_TdrQ" type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
           <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="min"/>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_0190CDE2-7E1E-4311-ADF9-D8A1D54F21EF" id="_4QQ8uAMUEeergZFRa_0-sg">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_0190CDE2-7E1E-4311-ADF9-D8A1D54F21EF" id="_VX6MAwM7EeeA6JqBJ_TdrQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -70,28 +67,28 @@ List<TaskSummary> tasks = taskService.getTasksAssignedAsPotentialOwner("agent1",
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_D30B9A34-D517-4A9F-8F27-25C848A00C2B" id="_4QQ8uQMUEeergZFRa_0-sg">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_D30B9A34-D517-4A9F-8F27-25C848A00C2B" id="_VX6MBAM7EeeA6JqBJ_TdrQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F47E04B7-8517-4032-AF14-B1255DC9FA62" id="_4QQ8ugMUEeergZFRa_0-sg">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_F47E04B7-8517-4032-AF14-B1255DC9FA62" id="_VX6MBQM7EeeA6JqBJ_TdrQ">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_2C06A2C0-3B49-4D07-9A13-4916A5DBED83" id="_4QQ8uwMUEeergZFRa_0-sg">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_2C06A2C0-3B49-4D07-9A13-4916A5DBED83" id="_VX6MBgM7EeeA6JqBJ_TdrQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_4QQ8vAMUEeergZFRa_0-sg">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_VX6MBwM7EeeA6JqBJ_TdrQ">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -106,7 +103,7 @@ List<TaskSummary> tasks = taskService.getTasksAssignedAsPotentialOwner("agent1",
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_4QN5YQMUEeergZFRa_0-sg</bpmn2:source>
-    <bpmn2:target>_4QN5YQMUEeergZFRa_0-sg</bpmn2:target>
+    <bpmn2:source>_VX3IsQM7EeeA6JqBJ_TdrQ</bpmn2:source>
+    <bpmn2:target>_VX3IsQM7EeeA6JqBJ_TdrQ</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
