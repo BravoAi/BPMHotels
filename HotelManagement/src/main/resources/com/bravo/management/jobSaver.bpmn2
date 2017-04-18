@@ -1,61 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_wfw74CQxEee2ftwf0hn3Bw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_9qOUkCQ9Eee2ftwf0hn3Bw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
   <bpmn2:itemDefinition id="_jobItem" structureRef="com.bravo.management.jobObject"/>
-  <bpmn2:itemDefinition id="_idItem" structureRef="Integer"/>
-  <bpmn2:itemDefinition id="_typeItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_isUrgentItem" structureRef="Boolean"/>
-  <bpmn2:itemDefinition id="_assignedToItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_isCriticalItem" structureRef="Boolean"/>
-  <bpmn2:itemDefinition id="_locationItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_isContactIsGuestItem" structureRef="Boolean"/>
-  <bpmn2:itemDefinition id="_categoryItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_descriptionItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_statusItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_parentJobIDItem" structureRef="Integer"/>
-  <bpmn2:itemDefinition id="_childJobIDItem" structureRef="Integer"/>
-  <bpmn2:itemDefinition id="_divisionItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_isLateItem" structureRef="Boolean"/>
-  <bpmn2:itemDefinition id="_guestNameItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_reporterNameItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_isRoomItem" structureRef="Boolean"/>
-  <bpmn2:itemDefinition id="_floorNumberItem" structureRef="Integer"/>
-  <bpmn2:itemDefinition id="_roomNumberItem" structureRef="Integer"/>
-  <bpmn2:itemDefinition id="_subCategoryItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_pictureItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_isRoomOutOfOrderItem" structureRef="Boolean"/>
-  <bpmn2:itemDefinition id="_dueAtItem" structureRef="Integer"/>
-  <bpmn2:itemDefinition id="_incidentIDItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_createdAtItem" structureRef="Integer"/>
-  <bpmn2:itemDefinition id="_closedAtItem" structureRef="Integer"/>
   <bpmn2:itemDefinition id="_jobArrayItem" structureRef="String"/>
   <bpmn2:process id="HotelManagement.jobSaver" drools:packageName="org.jbpm" drools:version="1.0" name="jobSaver" isExecutable="true">
     <bpmn2:property id="job" itemSubjectRef="_jobItem"/>
-    <bpmn2:property id="id" itemSubjectRef="_idItem"/>
-    <bpmn2:property id="type" itemSubjectRef="_typeItem"/>
-    <bpmn2:property id="isUrgent" itemSubjectRef="_isUrgentItem"/>
-    <bpmn2:property id="assignedTo" itemSubjectRef="_assignedToItem"/>
-    <bpmn2:property id="isCritical" itemSubjectRef="_isCriticalItem"/>
-    <bpmn2:property id="location" itemSubjectRef="_locationItem"/>
-    <bpmn2:property id="isContactIsGuest" itemSubjectRef="_isContactIsGuestItem"/>
-    <bpmn2:property id="category" itemSubjectRef="_categoryItem"/>
-    <bpmn2:property id="description" itemSubjectRef="_descriptionItem"/>
-    <bpmn2:property id="status" itemSubjectRef="_statusItem"/>
-    <bpmn2:property id="parentJobID" itemSubjectRef="_parentJobIDItem"/>
-    <bpmn2:property id="childJobID" itemSubjectRef="_childJobIDItem"/>
-    <bpmn2:property id="division" itemSubjectRef="_divisionItem"/>
-    <bpmn2:property id="isLate" itemSubjectRef="_isLateItem"/>
-    <bpmn2:property id="guestName" itemSubjectRef="_guestNameItem"/>
-    <bpmn2:property id="reporterName" itemSubjectRef="_reporterNameItem"/>
-    <bpmn2:property id="isRoom" itemSubjectRef="_isRoomItem"/>
-    <bpmn2:property id="floorNumber" itemSubjectRef="_floorNumberItem"/>
-    <bpmn2:property id="roomNumber" itemSubjectRef="_roomNumberItem"/>
-    <bpmn2:property id="subCategory" itemSubjectRef="_subCategoryItem"/>
-    <bpmn2:property id="picture" itemSubjectRef="_pictureItem"/>
-    <bpmn2:property id="isRoomOutOfOrder" itemSubjectRef="_isRoomOutOfOrderItem"/>
-    <bpmn2:property id="dueAt" itemSubjectRef="_dueAtItem"/>
-    <bpmn2:property id="incidentID" itemSubjectRef="_incidentIDItem"/>
-    <bpmn2:property id="createdAt" itemSubjectRef="_createdAtItem"/>
-    <bpmn2:property id="closedAt" itemSubjectRef="_closedAtItem"/>
     <bpmn2:property id="jobArray" itemSubjectRef="_jobArrayItem"/>
     <bpmn2:startEvent id="processStartEvent" drools:selectable="true" color:background-color="#9acd32" color:border-color="#000000" color:color="#000000" name="">
       <bpmn2:extensionElements>
@@ -63,7 +11,7 @@
           <drools:metaValue><![CDATA[]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:documentation id="_wfw74SQxEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
+      <bpmn2:documentation id="_9qOUkSQ9Eee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
       <bpmn2:outgoing>_0D49FCF2-C099-4144-90BD-5D41CAB8800F</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:scriptTask id="_33222507-A61D-4EA7-80F9-6732E73D711F" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="" scriptFormat="http://www.java.com/java">
@@ -72,7 +20,7 @@
           <drools:metaValue><![CDATA[]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:documentation id="_wfw74iQxEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
+      <bpmn2:documentation id="_9qOUkiQ9Eee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
       <bpmn2:incoming>_0D49FCF2-C099-4144-90BD-5D41CAB8800F</bpmn2:incoming>
       <bpmn2:outgoing>_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F</bpmn2:outgoing>
       <bpmn2:script><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();
@@ -241,7 +189,7 @@ kcontext.setVariable("jobArray",str);
 ]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="_0D49FCF2-C099-4144-90BD-5D41CAB8800F" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="_33222507-A61D-4EA7-80F9-6732E73D711F">
-      <bpmn2:documentation id="_wfw74yQxEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
+      <bpmn2:documentation id="_9qOUkyQ9Eee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
     </bpmn2:sequenceFlow>
     <bpmn2:endEvent id="_4A9B3243-8BDA-4436-AD4A-A94E85A72524" drools:selectable="true" color:background-color="#ff6347" color:border-color="#000000" color:color="#000000" name="">
       <bpmn2:extensionElements>
@@ -249,54 +197,54 @@ kcontext.setVariable("jobArray",str);
           <drools:metaValue><![CDATA[]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:documentation id="_wfw75CQxEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
+      <bpmn2:documentation id="_9qOUlCQ9Eee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
       <bpmn2:incoming>_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_33222507-A61D-4EA7-80F9-6732E73D711F" targetRef="_4A9B3243-8BDA-4436-AD4A-A94E85A72524">
-      <bpmn2:documentation id="_wfw75SQxEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
+      <bpmn2:documentation id="_9qOUlSQ9Eee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
     </bpmn2:sequenceFlow>
   </bpmn2:process>
-  <bpmndi:BPMNDiagram id="_wfw75iQxEee2ftwf0hn3Bw">
-    <bpmndi:BPMNPlane id="_wfw75yQxEee2ftwf0hn3Bw" bpmnElement="HotelManagement.jobSaver">
-      <bpmndi:BPMNShape id="_wfw76CQxEee2ftwf0hn3Bw" bpmnElement="processStartEvent">
+  <bpmndi:BPMNDiagram id="_9qOUliQ9Eee2ftwf0hn3Bw">
+    <bpmndi:BPMNPlane id="_9qOUlyQ9Eee2ftwf0hn3Bw" bpmnElement="HotelManagement.jobSaver">
+      <bpmndi:BPMNShape id="_9qOUmCQ9Eee2ftwf0hn3Bw" bpmnElement="processStartEvent">
         <dc:Bounds height="30.0" width="30.0" x="120.0" y="165.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_wfw76SQxEee2ftwf0hn3Bw" bpmnElement="_33222507-A61D-4EA7-80F9-6732E73D711F">
+      <bpmndi:BPMNShape id="_9qOUmSQ9Eee2ftwf0hn3Bw" bpmnElement="_33222507-A61D-4EA7-80F9-6732E73D711F">
         <dc:Bounds height="80.0" width="100.0" x="180.0" y="135.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_wfw76iQxEee2ftwf0hn3Bw" bpmnElement="_4A9B3243-8BDA-4436-AD4A-A94E85A72524">
+      <bpmndi:BPMNShape id="_9qOUmiQ9Eee2ftwf0hn3Bw" bpmnElement="_4A9B3243-8BDA-4436-AD4A-A94E85A72524">
         <dc:Bounds height="28.0" width="28.0" x="340.0" y="166.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="_wfw76yQxEee2ftwf0hn3Bw" bpmnElement="_0D49FCF2-C099-4144-90BD-5D41CAB8800F" sourceElement="_wfw76CQxEee2ftwf0hn3Bw" targetElement="_wfw76SQxEee2ftwf0hn3Bw">
+      <bpmndi:BPMNEdge id="_9qOUmyQ9Eee2ftwf0hn3Bw" bpmnElement="_0D49FCF2-C099-4144-90BD-5D41CAB8800F" sourceElement="_9qOUmCQ9Eee2ftwf0hn3Bw" targetElement="_9qOUmSQ9Eee2ftwf0hn3Bw">
         <di:waypoint xsi:type="dc:Point" x="135.0" y="180.0"/>
         <di:waypoint xsi:type="dc:Point" x="230.0" y="175.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_wfw77CQxEee2ftwf0hn3Bw" bpmnElement="_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F" sourceElement="_wfw76SQxEee2ftwf0hn3Bw" targetElement="_wfw76iQxEee2ftwf0hn3Bw">
+      <bpmndi:BPMNEdge id="_9qOUnCQ9Eee2ftwf0hn3Bw" bpmnElement="_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F" sourceElement="_9qOUmSQ9Eee2ftwf0hn3Bw" targetElement="_9qOUmiQ9Eee2ftwf0hn3Bw">
         <di:waypoint xsi:type="dc:Point" x="230.0" y="175.0"/>
         <di:waypoint xsi:type="dc:Point" x="354.0" y="180.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_wfw77SQxEee2ftwf0hn3Bw" type="BPSimData">
+  <bpmn2:relationship id="_9qOUnSQ9Eee2ftwf0hn3Bw" type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
           <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="min"/>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_0D49FCF2-C099-4144-90BD-5D41CAB8800F" id="_wfw77iQxEee2ftwf0hn3Bw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_0D49FCF2-C099-4144-90BD-5D41CAB8800F" id="_9qO7oCQ9Eee2ftwf0hn3Bw">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F" id="_wfw77yQxEee2ftwf0hn3Bw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F" id="_9qO7oSQ9Eee2ftwf0hn3Bw">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_wfw78CQxEee2ftwf0hn3Bw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_9qO7oiQ9Eee2ftwf0hn3Bw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -308,7 +256,7 @@ kcontext.setVariable("jobArray",str);
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_33222507-A61D-4EA7-80F9-6732E73D711F" id="_wfw78SQxEee2ftwf0hn3Bw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_33222507-A61D-4EA7-80F9-6732E73D711F" id="_9qO7oyQ9Eee2ftwf0hn3Bw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -320,7 +268,7 @@ kcontext.setVariable("jobArray",str);
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_4A9B3243-8BDA-4436-AD4A-A94E85A72524" id="_wfw78iQxEee2ftwf0hn3Bw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_4A9B3243-8BDA-4436-AD4A-A94E85A72524" id="_9qO7pCQ9Eee2ftwf0hn3Bw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -330,7 +278,7 @@ kcontext.setVariable("jobArray",str);
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_wfw74CQxEee2ftwf0hn3Bw</bpmn2:source>
-    <bpmn2:target>_wfw74CQxEee2ftwf0hn3Bw</bpmn2:target>
+    <bpmn2:source>_9qOUkCQ9Eee2ftwf0hn3Bw</bpmn2:source>
+    <bpmn2:target>_9qOUkCQ9Eee2ftwf0hn3Bw</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
