@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_sVeLECREEee2ftwf0hn3Bw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_KyP2kCRFEee2ftwf0hn3Bw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
   <bpmn2:itemDefinition id="_jobItem" structureRef="com.bravo.management.jobObject"/>
   <bpmn2:itemDefinition id="_jobArrayItem" structureRef="String"/>
   <bpmn2:process id="HotelManagement.jobSaver" drools:packageName="org.jbpm" drools:version="1.0" name="jobSaver" isExecutable="true">
@@ -11,7 +11,7 @@
           <drools:metaValue><![CDATA[]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:documentation id="_sVeLESREEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
+      <bpmn2:documentation id="_KyP2kSRFEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
       <bpmn2:outgoing>_0D49FCF2-C099-4144-90BD-5D41CAB8800F</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:scriptTask id="_33222507-A61D-4EA7-80F9-6732E73D711F" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="" scriptFormat="http://www.java.com/java">
@@ -20,7 +20,7 @@
           <drools:metaValue><![CDATA[]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:documentation id="_sVeLEiREEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
+      <bpmn2:documentation id="_KyP2kiRFEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
       <bpmn2:incoming>_0D49FCF2-C099-4144-90BD-5D41CAB8800F</bpmn2:incoming>
       <bpmn2:outgoing>_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F</bpmn2:outgoing>
       <bpmn2:script><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();
@@ -203,11 +203,18 @@ Double H = 1.0 * elapsed/1000/60/60;
 Double M = 1.0 * elapsed/1000/60;
 String elapsedTime = Integer.valueOf(H.intValue()) + ":" +  (M < 10 ? "0" : "") + Integer.valueOf(M.intValue());
 str +=  elapsedTime; 
+str += "~";
+if (KieFunctions.equalsTo(job.getStatus(),"NEEDED_JOBORDER")){
+	str += "נדרש Job-Order";
+} else {
+	str += "";
+}
+System.out.println(">>> " + str);
 kcontext.setVariable("jobArray",str);
 ]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="_0D49FCF2-C099-4144-90BD-5D41CAB8800F" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="_33222507-A61D-4EA7-80F9-6732E73D711F">
-      <bpmn2:documentation id="_sVeLEyREEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
+      <bpmn2:documentation id="_KyP2kyRFEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
     </bpmn2:sequenceFlow>
     <bpmn2:endEvent id="_4A9B3243-8BDA-4436-AD4A-A94E85A72524" drools:selectable="true" color:background-color="#ff6347" color:border-color="#000000" color:color="#000000" name="">
       <bpmn2:extensionElements>
@@ -215,54 +222,54 @@ kcontext.setVariable("jobArray",str);
           <drools:metaValue><![CDATA[]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:documentation id="_sVeLFCREEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
+      <bpmn2:documentation id="_KyP2lCRFEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
       <bpmn2:incoming>_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_33222507-A61D-4EA7-80F9-6732E73D711F" targetRef="_4A9B3243-8BDA-4436-AD4A-A94E85A72524">
-      <bpmn2:documentation id="_sVeLFSREEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
+      <bpmn2:documentation id="_KyP2lSRFEee2ftwf0hn3Bw"><![CDATA[com.bravo.management.jobObject jobObjectLocal=new com.bravo.management.jobObject();\njobObjectLocal=(com.bravo.management.jobObject)kcontext.getVariable("job");\n\nString str = "{";\nstr += job.getId();\nstr += ",";\nstr += job.getType();\nstr += ",";\nstr += job.getAssignedTo();\n\nstr += "}";\nkcontext.setVariable("jobArray",str);\n]]></bpmn2:documentation>
     </bpmn2:sequenceFlow>
   </bpmn2:process>
-  <bpmndi:BPMNDiagram id="_sVeLFiREEee2ftwf0hn3Bw">
-    <bpmndi:BPMNPlane id="_sVeLFyREEee2ftwf0hn3Bw" bpmnElement="HotelManagement.jobSaver">
-      <bpmndi:BPMNShape id="_sVeLGCREEee2ftwf0hn3Bw" bpmnElement="processStartEvent">
+  <bpmndi:BPMNDiagram id="_KyP2liRFEee2ftwf0hn3Bw">
+    <bpmndi:BPMNPlane id="_KyP2lyRFEee2ftwf0hn3Bw" bpmnElement="HotelManagement.jobSaver">
+      <bpmndi:BPMNShape id="_KyP2mCRFEee2ftwf0hn3Bw" bpmnElement="processStartEvent">
         <dc:Bounds height="30.0" width="30.0" x="120.0" y="165.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_sVeLGSREEee2ftwf0hn3Bw" bpmnElement="_33222507-A61D-4EA7-80F9-6732E73D711F">
+      <bpmndi:BPMNShape id="_KyP2mSRFEee2ftwf0hn3Bw" bpmnElement="_33222507-A61D-4EA7-80F9-6732E73D711F">
         <dc:Bounds height="80.0" width="100.0" x="195.0" y="135.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_sVeLGiREEee2ftwf0hn3Bw" bpmnElement="_4A9B3243-8BDA-4436-AD4A-A94E85A72524">
+      <bpmndi:BPMNShape id="_KyP2miRFEee2ftwf0hn3Bw" bpmnElement="_4A9B3243-8BDA-4436-AD4A-A94E85A72524">
         <dc:Bounds height="28.0" width="28.0" x="340.0" y="166.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="_sVeLGyREEee2ftwf0hn3Bw" bpmnElement="_0D49FCF2-C099-4144-90BD-5D41CAB8800F" sourceElement="_sVeLGCREEee2ftwf0hn3Bw" targetElement="_sVeLGSREEee2ftwf0hn3Bw">
+      <bpmndi:BPMNEdge id="_KyP2myRFEee2ftwf0hn3Bw" bpmnElement="_0D49FCF2-C099-4144-90BD-5D41CAB8800F" sourceElement="_KyP2mCRFEee2ftwf0hn3Bw" targetElement="_KyP2mSRFEee2ftwf0hn3Bw">
         <di:waypoint xsi:type="dc:Point" x="135.0" y="180.0"/>
         <di:waypoint xsi:type="dc:Point" x="245.0" y="175.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="_sVeLHCREEee2ftwf0hn3Bw" bpmnElement="_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F" sourceElement="_sVeLGSREEee2ftwf0hn3Bw" targetElement="_sVeLGiREEee2ftwf0hn3Bw">
+      <bpmndi:BPMNEdge id="_KyP2nCRFEee2ftwf0hn3Bw" bpmnElement="_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F" sourceElement="_KyP2mSRFEee2ftwf0hn3Bw" targetElement="_KyP2miRFEee2ftwf0hn3Bw">
         <di:waypoint xsi:type="dc:Point" x="245.0" y="175.0"/>
         <di:waypoint xsi:type="dc:Point" x="354.0" y="180.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_sVeLHSREEee2ftwf0hn3Bw" type="BPSimData">
+  <bpmn2:relationship id="_KyP2nSRFEee2ftwf0hn3Bw" type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
           <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="min"/>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_0D49FCF2-C099-4144-90BD-5D41CAB8800F" id="_sVeLHiREEee2ftwf0hn3Bw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_0D49FCF2-C099-4144-90BD-5D41CAB8800F" id="_KyP2niRFEee2ftwf0hn3Bw">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F" id="_sVeLHyREEee2ftwf0hn3Bw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_6D7ABD56-C2A4-4CBE-AB22-3A5E022D4B6F" id="_KyP2nyRFEee2ftwf0hn3Bw">
             <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
               <bpsim:Probability xsi:type="bpsim:Parameter">
                 <bpsim:FloatingParameter value="100.0"/>
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_sVeLICREEee2ftwf0hn3Bw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_KyP2oCRFEee2ftwf0hn3Bw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -274,7 +281,7 @@ kcontext.setVariable("jobArray",str);
               </bpsim:Probability>
             </bpsim:ControlParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_33222507-A61D-4EA7-80F9-6732E73D711F" id="_sVeLISREEee2ftwf0hn3Bw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_33222507-A61D-4EA7-80F9-6732E73D711F" id="_KyP2oSRFEee2ftwf0hn3Bw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -286,7 +293,7 @@ kcontext.setVariable("jobArray",str);
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_4A9B3243-8BDA-4436-AD4A-A94E85A72524" id="_sVeLIiREEee2ftwf0hn3Bw">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_4A9B3243-8BDA-4436-AD4A-A94E85A72524" id="_KyP2oiRFEee2ftwf0hn3Bw">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:UniformDistribution max="10.0" min="5.0"/>
@@ -296,7 +303,7 @@ kcontext.setVariable("jobArray",str);
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_sVeLECREEee2ftwf0hn3Bw</bpmn2:source>
-    <bpmn2:target>_sVeLECREEee2ftwf0hn3Bw</bpmn2:target>
+    <bpmn2:source>_KyP2kCRFEee2ftwf0hn3Bw</bpmn2:source>
+    <bpmn2:target>_KyP2kCRFEee2ftwf0hn3Bw</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
